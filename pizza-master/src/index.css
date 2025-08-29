@@ -6,6 +6,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ===== CSS Variables ===== */
 :root {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -59,4 +60,101 @@ body {
   --chart-3: 30 80% 55%;
   --chart-4: 280 65% 60%;
   --chart-5: 340 75% 55%;
+}
+
+/* ===== Gradient palettes (light & dark wood) ===== */
+.wooden-gradient {
+  background: linear-gradient(
+    90deg,
+    #4A342A 0%,
+    #5D4037 25%,
+    #6E4B3A 50%,
+    #8D6E63 75%,
+    #5D4037 100%
+  );
+}
+
+.wooden-gradient-vertical {
+  background: linear-gradient(
+    180deg,
+    #4A342A 0%,
+    #5D4037 25%,
+    #6E4B3A 50%,
+    #8D6E63 75%,
+    #5D4037 100%
+  );
+}
+
+.beige-gradient {
+  background: linear-gradient(
+    90deg,
+    #F8E8B0 0%,
+    #F5DEB3 25%,
+    #E6D2B5 50%,
+    #D2B48C 75%,
+    #F5DEB3 100%
+  );
+}
+
+.beige-gradient-vertical {
+  background: linear-gradient(
+    180deg,
+    #F8E8B0 0%,
+    #F5DEB3 25%,
+    #E6D2B5 50%,
+    #D2B48C 75%,
+    #F5DEB3 100%
+  );
+}
+
+/* ===== Light/Dark wood with subtle grain (optional) ===== */
+.light-wood-texture {
+  background:
+    linear-gradient(90deg, #F8E8B0 0%, #F5DEB3 25%, #E6D2B5 50%, #D2B48C 75%, #F5DEB3 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139,69,19,0.1) 2px, rgba(139,69,19,0.1) 4px);
+  background-blend-mode: multiply;
+}
+
+.dark-wood-texture {
+  background:
+    linear-gradient(90deg, #4A342A 0%, #5D4037 25%, #6E4B3A 50%, #8D6E63 75%, #5D4037 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.3) 3px, rgba(0,0,0,0.3) 6px);
+  background-blend-mode: multiply;
+}
+
+/* ===== Dark bark footer (matches reference image) ===== */
+.footer-gradient {
+  background-image:
+    linear-gradient(90deg, #120a06 0%, #1b100a 25%, #2a160c 50%, #1b100a 75%, #120a06 100%),
+    radial-gradient(ellipse at center, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.55) 80%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 2px, rgba(0,0,0,0.08) 2px 4px);
+  background-blend-mode: normal, multiply, overlay;
+  background-size: cover;
+  background-position: center;
+}
+
+.footer-gradient.darker {
+  background-image:
+    linear-gradient(90deg, #0d0704 0%, #160b06 25%, #231108 50%, #160b06 75%, #0d0704 100%),
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 80%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 2px, rgba(0,0,0,0.1) 2px 4px);
+}
+
+/* ===== Translucent Navbar Gradient (with blur) ===== */
+.navbar-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(74, 52, 42, 0.90) 0%,
+    rgba(93, 64, 55, 0.85) 25%,
+    rgba(110, 75, 58, 0.80) 50%,
+    rgba(93, 64, 55, 0.85) 100%
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(10%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* subtle separation */
+}
+
+/* Keep Messenger bubble on top of your UI */
+.fb_dialog, .fb_customer_chat_bounce_in_v2, .fb_customer_chat_bounce_out_v2 {
+  z-index: 999999 !important;
 }
