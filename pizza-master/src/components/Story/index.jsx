@@ -1,3 +1,5 @@
+import OurStory from "../../assets/OurStory.jpeg"
+
 const Story = () => {
   return (
     <section id="story" className="py-16 footer-gradient darker">
@@ -28,7 +30,7 @@ const Story = () => {
           </div>
           <div className="text-center">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNsSryT5MZJbFaHs9I9VhJn7XY2R9j1Z_Jag&s"
+              src={OurStory}
               alt="Chef Ashish Silwal"
               className="rounded-lg shadow-xl w-full max-w-md mx-auto"
             />
