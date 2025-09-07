@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
+import PizzaMasterAndTheSliceLogo from "../../assets/PizzaMasterAndTheSliceLogo.png"
 
 const Footer = ({ navItems, scrollToSection }) => {
   return (
@@ -8,13 +9,13 @@ const Footer = ({ navItems, scrollToSection }) => {
           <div>
             <div className="flex items-center mb-8">
               <img
-                src="/PizzaMasterLogo.png"
+                src={PizzaMasterAndTheSliceLogo}
                 alt="Pizza Master & The Slice Logo"
                 className="w-20 h-20 rounded-full object-cover mr-4"
               />
               <div>
-                <h3 className="text-2xl font-bold text-beigelight-100">Pizza Master</h3>
-                <p className="text-beigelight-300">& The Slice</p>
+                <h3 className="text-2xl font-bold text-beigelight-100">Pizza Master </h3>
+                <h3 className="text-xl font-bold text-beigelight-100">& The Slice</h3>
               </div>
             </div>
 
@@ -46,7 +47,7 @@ const Footer = ({ navItems, scrollToSection }) => {
               </div>
               <div className="flex items-center">
                 <MapPin className="w-5 h-5 mr-3 text-beigelight-300" />
-                <span>Adelaide, Australia - Serving within 200km radius</span>
+                <span>Adelaide, Australia - Serving within 50km radius</span>
               </div>
             </div>
 

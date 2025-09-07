@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Menu, X, Instagram, Facebook } from 'lucide-react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import PizzaMasterAndTheSliceLogo from "../../assets/PizzaMasterAndTheSliceLogo.png"
 
 const Header = ({ navItems, activeSection, scrollToSection }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +16,7 @@ const Header = ({ navItems, activeSection, scrollToSection }) => {
           <div className="flex-shrink-0">
             <Link to="/" className="block">
               <img
-                src="/PizzaMasterLogo.png"
+                src={PizzaMasterAndTheSliceLogo}
                 alt="Pizza Master & The Slice Logo"
                 className="h-16 w-16 rounded-full object-cover hover:opacity-80 transition-opacity cursor-pointer"
               />
