@@ -1,4 +1,5 @@
-import OurStory from "../../assets/OurStory.jpeg"
+import { Link } from 'react-router-dom';
+import OurStory from "../../assets/OurStory.jpeg";
 
 const Story = () => {
   return (
@@ -24,9 +25,12 @@ const Story = () => {
               Every pizza is crafted with love, using the finest ingredients and traditional 
               methods that have been passed down through generations of Italian pizza masters.
             </p>
-            <button className="bg-beigelight-100 hover:bg-beigelight-200 text-woodbrown-800 font-bold py-3 px-8 rounded-lg transition-colors">
+            <Link 
+              to="/about"
+              className="inline-block bg-beigelight-100 hover:bg-beigelight-200 text-woodbrown-800 font-bold py-3 px-8 rounded-lg transition-colors"
+            >
               LEARN MORE
-            </button>
+            </Link>
           </div>
           <div className="text-center">
             <img

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center">
@@ -11,6 +13,9 @@ const Hero = () => {
         <h2 className="text-4xl md:text-6xl font-bold text-beigelight-50 mb-4 font-serif italic">
           Buon Appetito!
         </h2>
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-beigelight-50 mb-6 font-serif">
+          Pizza Master & The Slice
+        </h1>
         <h3 className="text-3xl md:text-5xl font-bold text-beigelight-100 mb-6">
           MOBILE PIZZA CATERING
         </h3>
@@ -20,14 +25,20 @@ const Hero = () => {
         <p className="text-lg md:text-xl text-beigelight-200 mb-8 max-w-2xl mx-auto">
           We'll bring the wood-fired pizza truck to you! Book our mobile pizza catering service for unforgettable events
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-woodbrown-600 hover:bg-woodbrown-700 text-beigelight-50 font-bold py-4 px-8 rounded-lg transition-colors">
-            BOOK NOW
-          </button>
-          <button className="bg-transparent border-2 border-beigelight-100 text-beigelight-100 hover:bg-beigelight-100 hover:text-woodbrown-800 font-bold py-4 px-8 rounded-lg transition-colors">
-            VIEW MENU
-          </button>
-        </div>
+               <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                 {/* <Link
+                   to="/booking"
+                   className="inline-block bg-woodbrown-600 hover:bg-woodbrown-700 text-beigelight-50 font-bold py-4 px-8 rounded-lg transition-colors"
+                 >
+                   BOOK NOW
+                 </Link> */}
+                 <Link
+                   to="/menu"
+                   className="inline-block bg-transparent border-2 border-beigelight-100 text-beigelight-100 hover:bg-beigelight-100 hover:text-woodbrown-800 font-bold py-4 px-8 rounded-lg transition-colors"
+                 >
+                   VIEW MENU
+                 </Link>
+               </div>
       </div>
     </section>
   );
