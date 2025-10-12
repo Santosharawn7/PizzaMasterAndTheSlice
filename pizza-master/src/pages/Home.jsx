@@ -4,24 +4,16 @@ import Hero from '../components/Hero';
 import Catering from '../components/Catering';
 import Services from '../components/Services';
 import Menu from '../components/Menu';
-import Reviews from '../components/Reviews';
+// import Reviews from '../components/Reviews';
 import Story from '../components/Story';
 import Footer from '../components/Footer';
 import ChatWidget from '../components/ChatWidget';
+import { getNavigationItems } from '../components/Navigation';
 
 const Home = () => {
   const [activeSection, setActiveSection] = useState('home');
 
-  const navItems = [
-    { id: 'home', label: 'HOME' },
-    { id: 'about', label: 'ABOUT' },
-    { id: 'catering', label: 'CATERING' },
-    { id: 'services', label: 'SERVICES' },
-    { id: 'menu', label: 'MENU' },
-    { id: 'reviews', label: 'REVIEWS' },
-    { id: 'story', label: 'OUR STORY' },
-    { id: 'contact', label: 'CONTACT' }
-  ];
+  // Navigation items are now handled by the centralized Navigation component
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -32,6 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const navItems = getNavigationItems('home');
       const sections = navItems.map(item => item.id);
       const scrollPosition = window.scrollY + 100;
 
@@ -54,7 +47,7 @@ const Home = () => {
   return (
     <div className="min-h-screen light-wood-texture">
       <Header 
-        navItems={navItems} 
+        pageType="home" 
         activeSection={activeSection} 
         scrollToSection={scrollToSection} 
       />
@@ -62,10 +55,10 @@ const Home = () => {
       <Catering />
       <Services />
       <Menu />
-      <Reviews />
+      {/* <Reviews /> */}
       <Story />
       <Footer 
-        navItems={navItems} 
+        pageType="home" 
         scrollToSection={scrollToSection} 
       />
       <ChatWidget />

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Story = () => {
   return (
     <section id="story" className="py-16 footer-gradient darker">
@@ -22,13 +24,16 @@ const Story = () => {
               Every pizza is crafted with love, using the finest ingredients and traditional 
               methods that have been passed down through generations of Italian pizza masters.
             </p>
-            <button className="bg-beigelight-100 hover:bg-beigelight-200 text-woodbrown-800 font-bold py-3 px-8 rounded-lg transition-colors">
+            <Link 
+              to="/about"
+              className="inline-block bg-beigelight-100 hover:bg-beigelight-200 text-woodbrown-800 font-bold py-3 px-8 rounded-lg transition-colors"
+            >
               LEARN MORE
-            </button>
+            </Link>
           </div>
           <div className="text-center">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNsSryT5MZJbFaHs9I9VhJn7XY2R9j1Z_Jag&s"
+              src="https://i.imgur.com/iMM6g3s.jpeg"
               alt="Chef Ashish Silwal"
               className="rounded-lg shadow-xl w-full max-w-md mx-auto"
             />

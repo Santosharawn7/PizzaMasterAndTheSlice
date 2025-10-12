@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Menu, X, Instagram, Facebook, Search } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, Search, ChevronDown } from 'lucide-react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { getNavigationItems } from '../Navigation';
 
 // Searchable content for Pizza Master & The Slice
 const searchData = [
@@ -9,6 +10,7 @@ const searchData = [
     { type: "Page", label: 'Home', link: '/', description: 'Welcome to Pizza Master & The Slice' },
     { type: "Page", label: 'About', link: '/about', description: 'Learn about Chef Ashish and our story' },
     { type: "Page", label: 'Menu', link: '/menu', description: 'View our complete pizza menu' },
+    { type: "Page", label: 'Gallery', link: '/gallery', description: 'Visual journey through our authentic Italian pizza experience' },
     { type: "Page", label: 'Catering', link: '/#catering', description: 'Mobile pizza catering services' },
     { type: "Page", label: 'Services', link: '/#services', description: 'Our pizza services and offerings' },
     { type: "Page", label: 'Reviews', link: '/#reviews', description: 'Customer reviews and testimonials' },
@@ -19,63 +21,89 @@ const searchData = [
   // Pizza types and menu items
   {
     type: "Pizza",
+    label: "Garlic Pizza",
+    description: "Fresh garlic sauce, fior di latte, and oregano",
+    link: "/menu#garlic-pizza"
+  },
+  {
+    type: "Pizza",
     label: "Margherita Pizza",
-    description: "Classic tomato, mozzarella, and fresh basil",
+    description: "San Marzano tomato sauce, Pecorino Romano, fior di latte mozzarella, fresh basil",
     link: "/menu#margherita"
   },
   {
-    type: "Pizza", 
-    label: "Pepperoni Pizza",
-    description: "Spicy pepperoni with mozzarella cheese",
-    link: "/menu#pepperoni"
+    type: "Pizza",
+    label: "The Meat Feast",
+    description: "Rich BBQ sauce, layered with creamy fior di latte mozzarella, spicy pepperoni, succulent ham, and tender roasted chicken",
+    link: "/menu#meat-feast"
   },
   {
     type: "Pizza",
-    label: "Quattro Stagioni",
-    description: "Four seasons with artichokes, mushrooms, ham, and olives",
-    link: "/menu#quattro-stagioni"
+    label: "Pepperoni with Spicy Honey",
+    description: "Napoli sauce, fior di latte mozzarella, spicy pepperoni, finished with a drizzle of hot honey",
+    link: "/menu#pepperoni-spicy-honey"
   },
   {
     type: "Pizza",
-    label: "Capricciosa Pizza",
-    description: "Artichokes, mushrooms, prosciutto, and olives",
-    link: "/menu#capricciosa"
-  },
-  {
-    type: "Pizza",
-    label: "Quattro Formaggi",
-    description: "Four cheese blend with mozzarella, gorgonzola, parmesan, and ricotta",
-    link: "/menu#quattro-formaggi"
-  },
-  {
-    type: "Pizza",
-    label: "Vegetarian Pizza",
-    description: "Fresh vegetables with mozzarella and herbs",
-    link: "/menu#vegetarian"
-  },
-  {
-    type: "Pizza",
-    label: "Meat Lovers Pizza",
-    description: "Pepperoni, sausage, bacon, and ham",
-    link: "/menu#meat-lovers"
+    label: "Pizzamaster Special",
+    description: "Creamy fior di latte, slices of mortadella, topped with fresh buffalo mozzarella and finished with pistachio pesto and basil",
+    link: "/menu#pizzamaster-special"
   },
   {
     type: "Pizza",
     label: "Hawaiian Pizza",
-    description: "Ham, pineapple, and mozzarella cheese",
+    description: "San Marzano tomato sauce, fior di latte mozzarella, ham and pineapple",
     link: "/menu#hawaiian"
   },
   {
     type: "Pizza",
-    label: "BBQ Chicken Pizza",
-    description: "Grilled chicken with BBQ sauce and red onions",
-    link: "/menu#bbq-chicken"
+    label: "Vegetarian Pizza",
+    description: "San Marzano tomato, olives, mushroom, onion, fior di latte, basil",
+    link: "/menu#vegetarian"
   },
   {
     type: "Pizza",
-    label: "Supreme Pizza",
-    description: "Pepperoni, sausage, peppers, onions, and mushrooms",
+    label: "Truffle Mushroom Pizza",
+    description: "White base, fior di latte, mushroom, oregano, truffle oil, pecorino cheese",
+    link: "/menu#truffle-mushroom"
+  },
+  {
+    type: "Pizza",
+    label: "Vegan Pizza",
+    description: "San Marzano tomato, olives, vegan cheese, mushroom, onion, extra virgin olive oil",
+    link: "/menu#vegan"
+  },
+  {
+    type: "Pizza",
+    label: "Capricciosa Pizza",
+    description: "San Marzano tomato, fior di latte, mushroom, ham and olives",
+    link: "/menu#capricciosa"
+  },
+  {
+    type: "Pizza",
+    label: "Nutella Pizza",
+    description: "With strawberry and chocolate sauce",
+    link: "/menu#nutella"
+  },
+
+  // Pizza Packages
+  {
+    type: "Package",
+    label: "THE DELUXE Package",
+    description: "Premium experience with antipasto platter, unlimited drinks, and dessert - $45.99 per person",
+    link: "/menu#deluxe"
+  },
+  {
+    type: "Package",
+    label: "THE SUPREME Package",
+    description: "Perfect balance of premium pizzas, drinks, and dessert - $35.99 per person",
     link: "/menu#supreme"
+  },
+  {
+    type: "Package",
+    label: "THE CLASSIC Package",
+    description: "Great value with unlimited pizzas and dessert - $29.99 per person",
+    link: "/menu#classic"
   },
 
   // Services
@@ -119,11 +147,14 @@ const searchData = [
   }
 ];
 
-const Header = ({ navItems, activeSection, scrollToSection }) => {
+const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
+  // Get navigation items from centralized component
+  const navItems = getNavigationItems(pageType);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [searchFocus, setSearchFocus] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -200,7 +231,82 @@ const Header = ({ navItems, activeSection, scrollToSection }) => {
               const isActive =
                 activeSection === item.id ||
                 (item.id === 'about' && location.pathname === '/about') ||
-                (item.id === 'home' && location.pathname === '/');
+                (item.id === 'home' && location.pathname === '/') ||
+                (item.id === 'menu' && location.pathname === '/menu') ||
+                (item.id === 'gallery' && location.pathname === '/gallery');
+
+              // Special handling for Home dropdown
+              if (item.id === 'home') {
+                return (
+                  <div key={item.id} className="relative">
+                    <button
+                      onClick={() => {
+                        navigate('/');
+                        setHomeDropdownOpen(!homeDropdownOpen);
+                      }}
+                      onMouseEnter={() => setHomeDropdownOpen(true)}
+                      className={`text-sm font-medium transition-colors border-b-2 flex items-center space-x-1 ${
+                        isActive
+                          ? 'text-beigelight-100 border-beigelight-300'
+                          : 'text-beigelight-300 border-transparent hover:text-beigelight-200'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <ChevronDown className="w-3 h-3" />
+                    </button>
+                    
+                    {/* Home Dropdown Menu */}
+                    {homeDropdownOpen && (
+                      <div 
+                        className="absolute top-full left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-woodbrown-200 py-2 z-50"
+                        onMouseEnter={() => setHomeDropdownOpen(true)}
+                        onMouseLeave={() => setHomeDropdownOpen(false)}
+                      >
+                        <button
+                          onClick={() => {
+                            navigate('/');
+                            scrollToSection('catering');
+                            setHomeDropdownOpen(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-woodbrown-700 hover:bg-woodbrown-50 transition-colors"
+                        >
+                          Catering
+                        </button>
+                        <button
+                          onClick={() => {
+                            navigate('/');
+                            scrollToSection('services');
+                            setHomeDropdownOpen(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-woodbrown-700 hover:bg-woodbrown-50 transition-colors"
+                        >
+                          Services
+                        </button>
+                        <button
+                          onClick={() => {
+                            navigate('/');
+                            scrollToSection('menu');
+                            setHomeDropdownOpen(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-woodbrown-700 hover:bg-woodbrown-50 transition-colors"
+                        >
+                          Packages
+                        </button>
+                        <button
+                          onClick={() => {
+                            navigate('/');
+                            scrollToSection('story');
+                            setHomeDropdownOpen(false);
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-woodbrown-700 hover:bg-woodbrown-50 transition-colors"
+                        >
+                          Our Story
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
 
               return (
                 <button
@@ -208,6 +314,8 @@ const Header = ({ navItems, activeSection, scrollToSection }) => {
                   onClick={() => {
                     if (item.id === 'about') navigate('/about');
                     else if (item.id === 'home') navigate('/');
+                    else if (item.id === 'menu') navigate('/menu');
+                    else if (item.id === 'gallery') navigate('/gallery');
                     else scrollToSection(item.id);
                   }}
                   className={`text-sm font-medium transition-colors border-b-2 ${
@@ -284,6 +392,17 @@ const Header = ({ navItems, activeSection, scrollToSection }) => {
             >
               <Facebook className="w-5 h-5" />
             </a>
+            <a
+              href="https://www.tiktok.com/@pizzamaster.and.t"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-beigelight-300 hover:text-beigelight-100 transition-colors"
+              aria-label="TikTok"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+              </svg>
+            </a>
           </div>
 
           {/* Mobile Icons */}
@@ -320,20 +439,92 @@ const Header = ({ navItems, activeSection, scrollToSection }) => {
                  WebkitBackdropFilter: 'blur(6px)'
                }}>
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    if (item.id === 'about') navigate('/about');
-                    else if (item.id === 'home') navigate('/');
-                    else scrollToSection(item.id);
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-beigelight-300 hover:text-beigelight-100 hover:bg-white/5 rounded-md"
-                >
-                  {item.label}
-                </button>
-              ))}
+              {navItems.map((item) => {
+                // Special handling for Home dropdown in mobile
+                if (item.id === 'home') {
+                  return (
+                    <div key={item.id}>
+                      <button
+                        onClick={() => {
+                          navigate('/');
+                          setHomeDropdownOpen(!homeDropdownOpen);
+                        }}
+                        className="block w-full text-left px-3 py-2 text-base font-medium text-beigelight-300 hover:text-beigelight-100 hover:bg-white/5 rounded-md flex items-center justify-between"
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown className={`w-4 h-4 transition-transform ${homeDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      
+                      {/* Mobile Home Dropdown */}
+                      {homeDropdownOpen && (
+                        <div className="ml-4 mt-1 space-y-1">
+                          <button
+                            onClick={() => {
+                              navigate('/');
+                              scrollToSection('catering');
+                              setHomeDropdownOpen(false);
+                              setIsMenuOpen(false);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-sm font-medium text-beigelight-400 hover:text-beigelight-200 hover:bg-white/5 rounded-md"
+                          >
+                            Catering
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigate('/');
+                              scrollToSection('services');
+                              setHomeDropdownOpen(false);
+                              setIsMenuOpen(false);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-sm font-medium text-beigelight-400 hover:text-beigelight-200 hover:bg-white/5 rounded-md"
+                          >
+                            Services
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigate('/');
+                              scrollToSection('menu');
+                              setHomeDropdownOpen(false);
+                              setIsMenuOpen(false);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-sm font-medium text-beigelight-400 hover:text-beigelight-200 hover:bg-white/5 rounded-md"
+                          >
+                            Packages
+                          </button>
+                          <button
+                            onClick={() => {
+                              navigate('/');
+                              scrollToSection('story');
+                              setHomeDropdownOpen(false);
+                              setIsMenuOpen(false);
+                            }}
+                            className="block w-full text-left px-3 py-2 text-sm font-medium text-beigelight-400 hover:text-beigelight-200 hover:bg-white/5 rounded-md"
+                          >
+                            Our Story
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      if (item.id === 'about') navigate('/about');
+                      else if (item.id === 'home') navigate('/');
+                      else if (item.id === 'menu') navigate('/menu');
+                      else if (item.id === 'gallery') navigate('/gallery');
+                      else scrollToSection(item.id);
+                      setIsMenuOpen(false);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-base font-medium text-beigelight-300 hover:text-beigelight-100 hover:bg-white/5 rounded-md"
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
 
               {/* Socials in mobile menu */}
               <div className="flex items-center gap-4 px-3 pt-2">
@@ -354,6 +545,17 @@ const Header = ({ navItems, activeSection, scrollToSection }) => {
                   aria-label="Facebook"
                 >
                   <Facebook className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@pizzamaster.and.t"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-beigelight-300 hover:text-beigelight-100 transition-colors"
+                  aria-label="TikTok"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                  </svg>
                 </a>
               </div>
             </div>

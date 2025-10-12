@@ -100,8 +100,29 @@ const faqData = [
   {
     id: 14,
     question: "What's your cheapest pizza?",
-    answer: "Our Margherita pizza is $18, making it our most affordable option. It's a classic choice with San Marzano tomatoes, fresh mozzarella, and basil.",
-    keywords: ["cheapest", "affordable", "margherita", "price", "budget"],
+    answer: "All our individual pizzas are priced at $25. For catering packages, our Classic package is $29.99 per person, which includes unlimited pizzas and dessert.",
+    keywords: ["cheapest", "affordable", "price", "budget", "classic"],
+    type: "menu"
+  },
+  {
+    id: 15,
+    question: "What packages do you offer?",
+    answer: "We offer three packages: THE DELUXE ($45.99/person) with antipasto platter, THE SUPREME ($35.99/person) with premium pizzas, and THE CLASSIC ($29.99/person) with unlimited pizzas. All include dessert and have 2-hour duration.",
+    keywords: ["packages", "deluxe", "supreme", "classic", "catering", "options"],
+    type: "menu"
+  },
+  {
+    id: 16,
+    question: "Do you have vegan options?",
+    answer: "Yes! We have a Vegan pizza with San Marzano tomato, olives, vegan cheese, mushroom, onion, and extra virgin olive oil. We also offer dairy-free cheese for an additional $2.",
+    keywords: ["vegan", "dairy-free", "options", "dietary", "restrictions"],
+    type: "menu"
+  },
+  {
+    id: 17,
+    question: "What's your most expensive package?",
+    answer: "Our THE DELUXE package is $45.99 per person and includes 11 pizza varieties, antipasto platter, unlimited drinks, and dessert. It requires a minimum of 40 guests.",
+    keywords: ["expensive", "deluxe", "premium", "highest", "cost"],
     type: "menu"
   }
 ];
@@ -280,18 +301,24 @@ export default function ChatWidget() {
 
   // Pizza menu items from Menu.jsx
   const pizzaMenuItems = [
-    { name: "Margherita", price: "$18", category: "Classic", description: "The classic Neapolitan pizza with San Marzano tomatoes, fresh mozzarella, basil, and extra virgin olive oil" },
-    { name: "Pepperoni", price: "$22", category: "Classic", description: "Spicy pepperoni slices with mozzarella cheese and tomato sauce" },
-    { name: "Quattro Stagioni", price: "$26", category: "Classic", description: "Four seasons pizza with artichokes, mushrooms, ham, and black olives" },
-    { name: "Hawaiian", price: "$24", category: "Classic", description: "Ham, pineapple, mozzarella cheese, and tomato sauce" },
-    { name: "Supreme", price: "$28", category: "Classic", description: "Pepperoni, sausage, bell peppers, onions, mushrooms, and olives" },
-    { name: "BBQ Chicken", price: "$26", category: "Specialty", description: "BBQ sauce, grilled chicken, red onions, and mozzarella cheese" },
-    { name: "Vegetarian", price: "$24", category: "Vegetarian", description: "Bell peppers, mushrooms, onions, olives, tomatoes, and mozzarella" },
-    { name: "Buffalo Chicken", price: "$26", category: "Specialty", description: "Buffalo sauce, grilled chicken, red onions, and ranch drizzle" },
-    { name: "Meat Lovers", price: "$30", category: "Classic", description: "Pepperoni, sausage, bacon, ham, and mozzarella cheese" },
-    { name: "Mediterranean", price: "$26", category: "Vegetarian", description: "Feta cheese, olives, sun-dried tomatoes, artichokes, and fresh herbs" },
-    { name: "Pesto Chicken", price: "$26", category: "Specialty", description: "Basil pesto sauce, grilled chicken, cherry tomatoes, and mozzarella" },
-    { name: "Four Cheese", price: "$24", category: "Vegetarian", description: "Mozzarella, parmesan, gorgonzola, and ricotta cheese blend" }
+    { name: "Garlic Pizza", price: "$25", category: "Classic", description: "Fresh garlic sauce, fior di latte, and oregano" },
+    { name: "Margherita", price: "$25", category: "Classic", description: "San Marzano tomato sauce, Pecorino Romano, fior di latte mozzarella, fresh basil, and a drizzle of extra virgin olive oil" },
+    { name: "The Meat feast", price: "$25", category: "Classic", description: "Rich BBQ sauce (or traditional tomato base), layered with creamy fior di latte mozzarella, spicy pepperoni, succulent ham, and tender roasted chicken" },
+    { name: "Pepperoni with spicy honey", price: "$25", category: "Classic", description: "Napoli sauce, fior di latte mozzarella, spicy pepperoni, finished with a drizzle of hot honey" },
+    { name: "Pizzamaster Special", price: "$25", category: "Specialty", description: "Creamy fior di latte, slices of mortadella, topped with fresh buffalo mozzarella and finished with pistachio pesto and basil" },
+    { name: "Hawaiian pizza", price: "$25", category: "Classic", description: "San Marzano tomato sauce, fior di latte mozzarella, ham and pineapple" },
+    { name: "Vegetarian", price: "$25", category: "Vegetarian", description: "San Marzano tomato, olives, mushroom, onion, fior di latte, basil" },
+    { name: "Truffle mushroom", price: "$25", category: "Specialty", description: "White base, fior di latte, mushroom, oregano, truffle oil, pecorino cheese" },
+    { name: "Vegan pizza", price: "$25", category: "Vegan", description: "San Marzano tomato, olives, vegan cheese, mushroom, onion, extra virgin olive oil" },
+    { name: "Capricciosa", price: "$25", category: "Classic", description: "San Marzano tomato, fior di latte, mushroom, ham and olives" },
+    { name: "Nutella pizza", price: "$25", category: "Dessert", description: "With strawberry and chocolate sauce" }
+  ];
+
+  // Pizza packages
+  const pizzaPackages = [
+    { name: "THE DELUXE", price: "$45.99", description: "Premium experience with antipasto platter, unlimited drinks, and dessert", minGuests: 40 },
+    { name: "THE SUPREME", price: "$35.99", description: "Perfect balance of premium pizzas, drinks, and dessert", minGuests: 30 },
+    { name: "THE CLASSIC", price: "$29.99", description: "Great value with unlimited pizzas and dessert", minGuests: 30 }
   ];
 
   // Check if user is asking for a specific pizza
@@ -301,11 +328,25 @@ export default function ChatWidget() {
       lowerQuery.includes(pizza.name.toLowerCase()) ||
       lowerQuery.includes(pizza.name.toLowerCase().replace(/\s+/g, '')) ||
       // Handle common variations
-      (pizza.name === "Four Cheese" && (lowerQuery.includes("quattro formaggi") || lowerQuery.includes("4 cheese"))) ||
-      (pizza.name === "Quattro Stagioni" && (lowerQuery.includes("quattro stagioni") || lowerQuery.includes("four seasons"))) ||
-      (pizza.name === "Meat Lovers" && lowerQuery.includes("meat lovers")) ||
-      (pizza.name === "BBQ Chicken" && (lowerQuery.includes("bbq chicken") || lowerQuery.includes("barbecue chicken"))) ||
-      (pizza.name === "Buffalo Chicken" && lowerQuery.includes("buffalo chicken"))
+      (pizza.name === "The Meat feast" && (lowerQuery.includes("meat feast") || lowerQuery.includes("meatfeast"))) ||
+      (pizza.name === "Pepperoni with spicy honey" && (lowerQuery.includes("pepperoni") && lowerQuery.includes("honey"))) ||
+      (pizza.name === "Pizzamaster Special" && (lowerQuery.includes("pizzamaster") || lowerQuery.includes("special"))) ||
+      (pizza.name === "Hawaiian pizza" && lowerQuery.includes("hawaiian")) ||
+      (pizza.name === "Truffle mushroom" && (lowerQuery.includes("truffle") || lowerQuery.includes("mushroom"))) ||
+      (pizza.name === "Vegan pizza" && lowerQuery.includes("vegan")) ||
+      (pizza.name === "Nutella pizza" && (lowerQuery.includes("nutella") || lowerQuery.includes("dessert")))
+    );
+  };
+
+  // Check if user is asking for a pizza package
+  const findPackageInQuery = (query) => {
+    const lowerQuery = query.toLowerCase();
+    return pizzaPackages.find(pkg => 
+      lowerQuery.includes(pkg.name.toLowerCase()) ||
+      lowerQuery.includes(pkg.name.toLowerCase().replace(/\s+/g, '')) ||
+      (pkg.name === "THE DELUXE" && (lowerQuery.includes("deluxe") || lowerQuery.includes("premium"))) ||
+      (pkg.name === "THE SUPREME" && (lowerQuery.includes("supreme") || lowerQuery.includes("middle"))) ||
+      (pkg.name === "THE CLASSIC" && (lowerQuery.includes("classic") || lowerQuery.includes("basic")))
     );
   };
 
@@ -350,7 +391,14 @@ export default function ChatWidget() {
       // Check for specific pizza queries first
       const foundPizza = findPizzaInQuery(userQuery);
       if (foundPizza) {
-        botResponse = `Yes! We have ${foundPizza.name} pizza on our menu! 🍕\n\n**${foundPizza.name}** (${foundPizza.price})\n${foundPizza.description}\n\nCategory: ${foundPizza.category}\n\nWould you like to see it on our full menu?`;
+        botResponse = `Yes! We have ${foundPizza.name} on our menu! 🍕\n\n**${foundPizza.name}** (${foundPizza.price})\n${foundPizza.description}\n\nCategory: ${foundPizza.category}\n\nWould you like to see it on our full menu?`;
+        isNavigation = true;
+        navigationLink = "/menu";
+      }
+      // Check for pizza package queries
+      else if (findPackageInQuery(userQuery)) {
+        const foundPackage = findPackageInQuery(userQuery);
+        botResponse = `Great choice! We offer ${foundPackage.name} package! 🍕\n\n**${foundPackage.name}** (${foundPackage.price} per person)\n${foundPackage.description}\n\nMinimum guests: ${foundPackage.minGuests}\n\nWould you like to see all our packages on our menu?`;
         isNavigation = true;
         navigationLink = "/menu";
       }
@@ -520,20 +568,25 @@ export default function ChatWidget() {
             ))}
           </div>
 
-          {/* Facebook Messenger Link */}
-          <div className="p-3 border-t border-gray-200 bg-blue-50">
-            <div className="flex items-center space-x-2 text-sm text-blue-700">
-              <span>For immediate assistance, contact us on</span>
+          {/* Messenger Link */}
+          <div className="p-4 border-t border-woodbrown-300 bg-woodbrown-50">
+            <div className="flex items-center justify-between">
+              <div className="text-left">
+                <p className="text-sm text-woodbrown-700">For immediate assistance,</p>
+                <p className="text-sm text-woodbrown-700">Contact us on</p>
+              </div>
               <a
-                href="https://m.me/arawnizer"
+                href="https://m.me/61578603166709"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold hover:underline flex items-center space-x-1"
+                className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C6.5 2 2 6.14 2 11.25c0 2.38 1.19 4.47 3.03 5.99.3.25.5.6.5.99v2.5c0 .55.45 1 1 1h.5c.28 0 .5-.22.5-.5v-1.5c0-.28.22-.5.5-.5.83 0 1.5-.67 1.5-1.5V14c0-.28.22-.5.5-.5.83 0 1.5-.67 1.5-1.5v-1c0-.28.22-.5.5-.5h1.5c.28 0 .5.22.5.5v1c0 .83.67 1.5 1.5 1.5.28 0 .5.22.5.5v1c0 .83.67 1.5 1.5 1.5.28 0 .5.22.5.5v1.5c0 .28.22.5.5.5h.5c.55 0 1-.45 1-1v-2.5c0-.39.2-.74.5-.99C20.81 15.72 22 13.63 22 11.25 22 6.14 17.5 2 12 2zm0 2c4.42 0 8 3.58 8 8s-3.58 8-8 8-8-3.58-8-8 3.58-8 8-8z"/>
-                </svg>
-                <span>Facebook Messenger</span>
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Facebook_Messenger_logo_2020.svg/512px-Facebook_Messenger_logo_2020.svg.png?20220118041828" 
+                  alt="Messenger" 
+                  className="w-5 h-5"
+                />
+                <span className="text-sm">Messenger</span>
               </a>
             </div>
           </div>

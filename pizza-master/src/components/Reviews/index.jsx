@@ -13,7 +13,7 @@ const Reviews = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-lg shadow-lg">
             <div className="flex items-center mb-4">
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
@@ -36,7 +36,7 @@ const Reviews = () => {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-lg shadow-lg">
             <div className="flex items-center mb-4">
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
@@ -59,7 +59,7 @@ const Reviews = () => {
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-lg shadow-lg">
             <div className="flex items-center mb-4">
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => (
