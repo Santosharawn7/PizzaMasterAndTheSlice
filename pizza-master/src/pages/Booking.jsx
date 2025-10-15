@@ -20,7 +20,7 @@ const BookingPage = () => {
       />
 
       {/* Booking Hero Section */}
-      <section className="pt-20 pb-16 footer-gradient darker">
+      <section className="pt-24 pb-16 footer-gradient darker">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-beigelight-100 mb-6 font-serif italic">
             Book Your Event

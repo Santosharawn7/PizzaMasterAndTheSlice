@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { processChatQuery } from '../../utils/nlpProcessor';
 
 const PAGE_ID = "61578603166709"; // Updated to your Facebook Page ID
 const LOCALES = ["en_US", "en_GB"];
@@ -299,6 +300,27 @@ export default function ChatWidget() {
     setSearchQuery("");
   };
 
+  // Function to render clickable social media links
+  const renderMessageWithLinks = (text) => {
+    const socialLinks = {
+      '@pizzamaster_and_the_slice': 'https://www.instagram.com/pizzamaster_and_the_slice/',
+      'Pizza Master & The Slice': 'https://www.facebook.com/profile.php?id=61578603166709',
+      '@pizzamaster.and.t': 'https://www.tiktok.com/@pizzamaster.and.t',
+      'pizzamaster2632@gmail.com': 'mailto:pizzamaster2632@gmail.com',
+      'Chat with us': 'https://www.messenger.com/t/774891612364601'
+    };
+
+    let processedText = text;
+    
+    // Replace social media handles and links with clickable elements
+    Object.entries(socialLinks).forEach(([handle, url]) => {
+      const regex = new RegExp(`\\b${handle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'g');
+      processedText = processedText.replace(regex, `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium">${handle}</a>`);
+    });
+
+    return processedText;
+  };
+
   // Pizza menu items from Menu.jsx
   const pizzaMenuItems = [
     { name: "Garlic Pizza", price: "$25", category: "Classic", description: "Fresh garlic sauce, fior di latte, and oregano" },
@@ -381,81 +403,51 @@ export default function ChatWidget() {
     const userQuery = inputMessage.toLowerCase();
     setInputMessage("");
 
-    // Smart response based on user input
+    // Use NLP processor for intelligent response
     setTimeout(() => {
-      let botResponse = "";
-      let isFAQ = false;
-      let isNavigation = false;
-      let navigationLink = "";
-
-      // Check for specific pizza queries first
-      const foundPizza = findPizzaInQuery(userQuery);
-      if (foundPizza) {
-        botResponse = `Yes! We have ${foundPizza.name} on our menu! 🍕\n\n**${foundPizza.name}** (${foundPizza.price})\n${foundPizza.description}\n\nCategory: ${foundPizza.category}\n\nWould you like to see it on our full menu?`;
-        isNavigation = true;
-        navigationLink = "/menu";
+      try {
+        const nlpResult = processChatQuery(userQuery);
+        
+        const botMessage = { 
+          id: Date.now() + 1, 
+          text: nlpResult.response, 
+          isBot: true, 
+          timestamp: new Date(),
+          isFAQ: nlpResult.showFaq,
+          isNavigation: !!nlpResult.navigationLink,
+          navigationLink: nlpResult.navigationLink || ""
+        };
+        
+        // Handle FAQ display
+        if (nlpResult.showFaq) {
+          setShowFAQs(true);
+        }
+        
+        setMessages(prev => [...prev, botMessage]);
+        
+        // Log for debugging
+        console.log('NLP Result:', {
+          query: userQuery,
+          intent: nlpResult.intent,
+          confidence: nlpResult.confidence,
+          response: nlpResult.response
+        });
+        
+      } catch (error) {
+        console.error('NLP Processing Error:', error);
+        
+        // Fallback response
+        const fallbackMessage = { 
+          id: Date.now() + 1, 
+          text: "I'm here to help! You can ask me about our menu, pizza packages, catering services, gallery, chef, or contact information. If you need help with something specific, just let me know!", 
+          isBot: true, 
+          timestamp: new Date(),
+          isFAQ: false,
+          isNavigation: false,
+          navigationLink: ""
+        };
+        setMessages(prev => [...prev, fallbackMessage]);
       }
-      // Check for pizza package queries
-      else if (findPackageInQuery(userQuery)) {
-        const foundPackage = findPackageInQuery(userQuery);
-        botResponse = `Great choice! We offer ${foundPackage.name} package! 🍕\n\n**${foundPackage.name}** (${foundPackage.price} per person)\n${foundPackage.description}\n\nMinimum guests: ${foundPackage.minGuests}\n\nWould you like to see all our packages on our menu?`;
-        isNavigation = true;
-        navigationLink = "/menu";
-      }
-      // Check for menu-related queries
-      else if (userQuery.includes('menu') || userQuery.includes('pizza') || userQuery.includes('order')) {
-        botResponse = "I'd be happy to help you with our menu! We offer a variety of authentic pizzas including Margherita, Pepperoni, Quattro Stagioni, and many more. Would you like me to show you our full menu?";
-        isNavigation = true;
-        navigationLink = "/menu";
-      }
-      // Check for catering queries
-      else if (userQuery.includes('catering') || userQuery.includes('event') || userQuery.includes('party')) {
-        botResponse = "Great! We offer mobile pizza catering services for events, weddings, and parties. Our wood-fired pizza truck brings authentic pizza directly to your location. Would you like to learn more about our catering services?";
-        isNavigation = true;
-        navigationLink = "/#catering";
-      }
-      // Check for chef queries
-      else if (userQuery.includes('chef') || userQuery.includes('ashish')) {
-        botResponse = "Chef Ashish Silwal is our master pizza chef from Adelaide, Australia. He brings authentic pizza-making expertise and passion to every pizza we create. You can learn more about him on our About page!";
-        isNavigation = true;
-        navigationLink = "/about";
-      }
-      // Check for location queries
-      else if (userQuery.includes('location') || userQuery.includes('adelaide') || userQuery.includes('where')) {
-        botResponse = "We are based in Adelaide, Australia, and serve the entire Adelaide community with our mobile pizza services. We bring our pizza truck directly to your location!";
-      }
-      // Check for contact queries
-      else if (userQuery.includes('contact') || userQuery.includes('phone') || userQuery.includes('call')) {
-        botResponse = "You can contact us through our Facebook page or reach out directly. For immediate assistance, I recommend using our Facebook Messenger chat for faster response!";
-      }
-      // Check for price queries
-      else if (userQuery.includes('price') || userQuery.includes('cost') || userQuery.includes('how much')) {
-        botResponse = "Our pizza prices range from $18 to $30 depending on the type and ingredients. For example, Margherita is $18, Pepperoni is $22, and our Supreme pizza is $28. Would you like to see our full menu with all prices?";
-        isNavigation = true;
-        navigationLink = "/menu";
-      }
-      // Check for vegetarian queries
-      else if (userQuery.includes('vegetarian') || userQuery.includes('veggie') || userQuery.includes('vegan')) {
-        botResponse = "Yes! We have several vegetarian options including our Vegetarian Pizza ($24), Mediterranean ($26), and Four Cheese ($24). We also have Quattro Stagioni which can be made vegetarian. Would you like to see our full vegetarian selection?";
-        isNavigation = true;
-        navigationLink = "/menu";
-      }
-      // Default response
-      else {
-        botResponse = "I understand you're looking for information. Let me show you some frequently asked questions that might help, or you can ask me about our menu, catering services, or contact information.";
-        setShowFAQs(true);
-      }
-
-      const botMessage = { 
-        id: Date.now() + 1, 
-        text: botResponse, 
-        isBot: true, 
-        timestamp: new Date(),
-        isFAQ,
-        isNavigation,
-        navigationLink
-      };
-      setMessages(prev => [...prev, botMessage]);
     }, 1000);
   };
 
@@ -504,35 +496,33 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          {/* FAQ Search */}
+          {/* FAQ Search - Compact */}
           {showFAQs && (
-            <div className="p-4 border-b border-gray-200 bg-gray-50">
-              <div className="flex items-center space-x-2 mb-3">
-                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-                <input
-                  type="text"
-                  placeholder="Search FAQs..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-woodbrown-500"
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                    searchFAQs(e.target.value);
-                  }}
-                />
+            <div className="p-2 border-b border-gray-200 bg-gray-50">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-medium text-woodbrown-700">Quick FAQs</span>
+                <button
+                  onClick={() => setShowFAQs(false)}
+                  className="text-xs text-gray-500 hover:text-gray-700"
+                >
+                  ✕ Close
+                </button>
               </div>
-              <div className="max-h-32 overflow-y-auto">
-                {filteredFAQs.map((faq) => (
+              <div className="max-h-20 overflow-y-auto">
+                {filteredFAQs.slice(0, 3).map((faq) => (
                   <button
                     key={faq.id}
                     onClick={() => handleFAQSelect(faq)}
-                    className="block w-full text-left p-2 hover:bg-woodbrown-100 rounded-md text-sm transition-colors"
+                    className="block w-full text-left p-1 hover:bg-woodbrown-100 rounded text-xs transition-colors"
                   >
-                    <div className="font-medium text-woodbrown-800">{faq.question}</div>
-                    <div className="text-xs text-gray-600 mt-1">{faq.type}</div>
+                    <div className="font-medium text-woodbrown-800 truncate">{faq.question}</div>
                   </button>
                 ))}
+                {filteredFAQs.length > 3 && (
+                  <div className="text-xs text-gray-500 p-1">
+                    +{filteredFAQs.length - 3} more questions...
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -551,7 +541,10 @@ export default function ChatWidget() {
                       : 'bg-blue-600 text-white'
                   }`}
                 >
-                  <div className="whitespace-pre-wrap">{message.text}</div>
+                  <div 
+                    className="whitespace-pre-wrap" 
+                    dangerouslySetInnerHTML={{ __html: renderMessageWithLinks(message.text) }}
+                  />
                   {message.isNavigation && message.navigationLink && (
                     <button
                       onClick={() => navigate(message.navigationLink)}

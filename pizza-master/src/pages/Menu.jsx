@@ -3,12 +3,19 @@ import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ChatWidget from '../components/ChatWidget';
+import { useScrollAnimation, useStaggerAnimation } from '../hooks/useScrollAnimation';
 
 const Menu = () => {
   const location = useLocation();
-  const [expandedPackage, setExpandedPackage] = useState('deluxe'); // Deluxe opens by default
+  const [expandedPackage, setExpandedPackage] = useState('classic'); // Classic opens by default
   const [selectedPizza, setSelectedPizza] = useState(null); // For modal
   const [hoveredPizza, setHoveredPizza] = useState(null); // For hover image
+
+  // GSAP Scroll Animation refs
+  const heroRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.1 });
+  const packagesRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
+  const pizzaDetailsRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
+  const readyToOrderRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
 
   // Navigation items are now handled by the centralized Navigation component
 
@@ -34,21 +41,19 @@ const Menu = () => {
   // Pizza packages
   const pizzaPackages = [
     {
-      id: "deluxe",
-      name: "THE DELUXE",
-      price: "$45.99",
+      id: "classic",
+      name: "THE CLASSIC",
+      price: "$29.99",
       perPerson: true,
-      description: "The Deluxe includes unlimited soft drinks, a selection of premium pizzas, an antipasto platter, and dessert. The package is available for a duration of 2 hours and requires a minimum of 40 guests.",
+      description: "The Classic includes unlimited selection of pizzas, and dessert. The package is available for a duration of 2 hours and requires a minimum of 30 guests.",
       deliveryInfo: "We also accept delivery and takeaway orders with a minimum of 25 pizzas. Each pizza is priced at $25.",
-      minGuests: 40,
+      minGuests: 30,
       duration: "2 hours",
-      includes: ["Unlimited soft drinks", "Premium pizzas", "Antipasto platter", "Dessert"],
+      includes: ["Unlimited pizzas", "Dessert"],
       pizzas: [
         "Garlic Pizza", "Margherita", "The Meat feast", "Pepperoni with spicy honey", 
-        "Pizzamaster Special", "Hawaiian pizza", "Vegetarian", "Truffle mushroom", 
-        "Vegan pizza", "Capricciosa", "Nutella pizza"
-      ],
-      extras: ["Antipasto platters: A selection of locally cured meats, pickled cucumbers, artisan crackers, handmade pita bread with assorted dips, dried fruits, and a variety of cheeses."]
+        "Hawaiian pizza", "Vegetarian", "Nutella pizza"
+      ]
     },
     {
       id: "supreme",
@@ -67,19 +72,21 @@ const Menu = () => {
       ]
     },
     {
-      id: "classic",
-      name: "THE CLASSIC",
-      price: "$29.99",
+      id: "deluxe",
+      name: "THE DELUXE",
+      price: "$45.99",
       perPerson: true,
-      description: "The Classic includes unlimited selection of pizzas, and dessert. The package is available for a duration of 2 hours and requires a minimum of 30 guests.",
+      description: "The Deluxe includes unlimited soft drinks, a selection of premium pizzas, an antipasto platter, and dessert. The package is available for a duration of 2 hours and requires a minimum of 40 guests.",
       deliveryInfo: "We also accept delivery and takeaway orders with a minimum of 25 pizzas. Each pizza is priced at $25.",
-      minGuests: 30,
+      minGuests: 40,
       duration: "2 hours",
-      includes: ["Unlimited pizzas", "Dessert"],
+      includes: ["Unlimited soft drinks", "Premium pizzas", "Antipasto platter", "Dessert"],
       pizzas: [
         "Garlic Pizza", "Margherita", "The Meat feast", "Pepperoni with spicy honey", 
-        "Hawaiian pizza", "Vegetarian", "Nutella pizza"
-      ]
+        "Pizzamaster Special", "Hawaiian pizza", "Vegetarian", "Truffle mushroom", 
+        "Vegan pizza", "Capricciosa", "Nutella pizza"
+      ],
+      extras: ["Antipasto platters: A selection of locally cured meats, pickled cucumbers, artisan crackers, handmade pita bread with assorted dips, dried fruits, and a variety of cheeses."]
     }
   ];
 
@@ -91,7 +98,7 @@ const Menu = () => {
     },
     "Margherita": {
       description: "San Marzano tomato sauce, Pecorino Romano, fior di latte mozzarella, fresh basil, and a drizzle of extra virgin olive oil.",
-      image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "https://i.imgur.com/0SHQFSh.jpeg"
     },
     "The Meat feast": {
       description: "Rich BBQ sauce (or traditional tomato base), layered with creamy fior di latte mozzarella, spicy pepperoni, succulent ham, and tender roasted chicken.",
@@ -99,7 +106,7 @@ const Menu = () => {
     },
     "Pepperoni with spicy honey": {
       description: "Napoli sauce, fior di latte mozzarella, spicy pepperoni, finished with a drizzle of hot honey",
-      image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "https://i.imgur.com/sb0ilwL.jpeg"
     },
     "Pizzamaster Special": {
       description: "Creamy fior di latte, slices of mortadella, topped with fresh buffalo mozzarella and finished with pistachio pesto and basil.",
@@ -111,7 +118,7 @@ const Menu = () => {
     },
     "Vegetarian": {
       description: "San Marzano tomato, olives, mushroom, onion, fior di latte, basil",
-      image: "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "https://i.imgur.com/tte0yOz.jpeg"
     },
     "Truffle mushroom": {
       description: "White base, fior di latte, mushroom, oregano, truffle oil, pecorino cheese",
@@ -127,7 +134,7 @@ const Menu = () => {
     },
     "Nutella pizza": {
       description: "With strawberry and chocolate sauce.",
-      image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+      image: "https://i.imgur.com/T6MW7d9.jpeg"
     }
   };
 
@@ -148,7 +155,7 @@ const Menu = () => {
       />
       
       {/* Menu Hero Section */}
-      <section className="pt-20 pb-16 relative overflow-hidden min-h-[700px] flex items-center">
+      <section ref={heroRef} className="pt-24 pb-16 relative overflow-hidden min-h-[700px] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -172,7 +179,7 @@ const Menu = () => {
       </section>
 
       {/* Pizza Packages */}
-      <section className="py-16 beige-gradient-vertical">
+      <section ref={packagesRef} className="py-16 beige-gradient-vertical">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-8 relative" style={{ zIndex: 1 }}>
             {pizzaPackages.map((pkg) => {
@@ -277,20 +284,40 @@ const Menu = () => {
                           <span className="ml-2 bg-woodbrown-600/50 text-white text-xs px-2 py-1 rounded-full">
                             {pkg.pizzas.length} varieties
                           </span>
+                          <span className="md:hidden ml-2 text-xs text-woodbrown-600 font-normal">(Tap to view details)</span>
                         </h4>
                         <div className="grid grid-cols-1 gap-3">
                           {pkg.pizzas.map((pizza, index) => (
                             <div 
                               key={index} 
-                              className="group relative text-sm text-white border-l-2 border-woodbrown-300 pl-3 py-2 rounded-r-lg transition-all duration-300 cursor-pointer backdrop-blur-sm bg-woodbrown-800/40 hover:bg-woodbrown-800/50 border border-woodbrown-600/40 hover:border-woodbrown-600/60"
+                              className="group relative text-sm text-white border-l-2 border-woodbrown-300 pl-3 py-2 rounded-r-lg transition-all duration-300 cursor-pointer backdrop-blur-sm bg-woodbrown-800/40 md:hover:bg-woodbrown-800/50 border border-woodbrown-600/40 md:hover:border-woodbrown-600/60 active:bg-woodbrown-800/60 active:border-woodbrown-600/80 active:shadow-lg active:shadow-woodbrown-600/30 active:scale-[0.98] md:active:scale-100 md:shadow-none shadow-lg shadow-woodbrown-600/20"
                               style={{ zIndex: 1 }}
                               onClick={() => setSelectedPizza({ name: pizza, ...pizzaDetails[pizza] })}
-                              onMouseEnter={() => setHoveredPizza({ name: pizza, ...pizzaDetails[pizza] })}
-                              onMouseLeave={() => setHoveredPizza(null)}
+                              onMouseEnter={(e) => {
+                                // Only trigger hover on desktop (md and up)
+                                if (window.innerWidth >= 768) {
+                                  setHoveredPizza({ name: pizza, ...pizzaDetails[pizza] });
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                // Only trigger hover on desktop (md and up)
+                                if (window.innerWidth >= 768) {
+                                  setHoveredPizza(null);
+                                }
+                              }}
                             >
-                              <span className="font-medium text-white group-hover:text-beigelight-100 transition-colors">{pizza}</span>
+                              <div className="flex items-center justify-between">
+                                <span className="font-medium text-white md:group-hover:text-beigelight-100 transition-colors flex-1">{pizza}</span>
+                                {/* Click indicator for mobile */}
+                                <div className="md:hidden flex items-center ml-3">
+                                  <svg className="w-4 h-4 text-beigelight-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                  </svg>
+                                </div>
+                              </div>
                               {pizzaDetails[pizza] && (
-                                <div className="text-xs text-beigelight-200 mt-1 group-hover:text-beigelight-100 transition-colors">
+                                <div className="text-xs text-beigelight-200 mt-1 md:group-hover:text-beigelight-100 transition-colors">
                                   {pizzaDetails[pizza].description}
                                 </div>
                               )}
@@ -319,13 +346,13 @@ const Menu = () => {
                         </div>
                       </div>
 
-                      {/* Book Button */}
-                      <button className="w-full bg-gradient-to-r from-woodbrown-600 to-woodbrown-700 hover:from-woodbrown-700 hover:to-woodbrown-800 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
+                      {/* Book Button - Commented out until booking functionality is implemented */}
+                      {/* <button className="w-full bg-gradient-to-r from-woodbrown-600 to-woodbrown-700 hover:from-woodbrown-700 hover:to-woodbrown-800 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"/>
                         </svg>
                         <span>BOOK {pkg.name}</span>
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -359,7 +386,7 @@ const Menu = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 footer-gradient darker">
+      <section ref={readyToOrderRef} className="py-16 footer-gradient darker">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-beigelight-100 mb-4">
             Ready to Order?
@@ -367,9 +394,9 @@ const Menu = () => {
           <p className="text-xl text-beigelight-200 mb-8 max-w-2xl mx-auto">
             Contact us to book our mobile pizza catering service for your next event!
           </p>
-          <button className="bg-beigelight-100 hover:bg-beigelight-200 text-woodbrown-800 font-bold py-3 px-8 rounded-lg transition-colors">
+          {/* <button className="bg-beigelight-100 hover:bg-beigelight-200 text-woodbrown-800 font-bold py-3 px-8 rounded-lg transition-colors">
             BOOK NOW
-          </button>
+          </button> */}
         </div>
       </section>
 
@@ -379,9 +406,9 @@ const Menu = () => {
       />
       <ChatWidget />
 
-      {/* Hover Image - Rendered Outside Normal Flow */}
+      {/* Hover Image - Rendered Outside Normal Flow - Desktop Only */}
       {hoveredPizza && (
-        <div className="fixed inset-0 pointer-events-none z-[9999999] flex items-center justify-center">
+        <div className="hidden md:flex fixed inset-0 pointer-events-none z-[9999999] items-center justify-center">
           <div className="w-128 h-96 bg-white rounded-lg shadow-2xl border border-gray-200 transition-all duration-300">
             <div className="relative w-full h-full rounded-lg overflow-hidden">
               <img

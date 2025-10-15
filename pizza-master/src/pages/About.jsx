@@ -1,10 +1,15 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ChatWidget from "../components/ChatWidget";
-import AboutMe from "../assets/AboutMe.jpg";
 import PizzaCertificate from "../assets/PizzaCertificate.jpg";
+import { useScrollAnimation, useStaggerAnimation } from '../hooks/useScrollAnimation';
 
 const About = () => {
+  // GSAP Scroll Animation refs
+  const heroRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.1 });
+  const aboutRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
+  const certificateRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
+
   // Navigation items are now handled by the centralized Navigation component
 
   const scrollToSection = (sectionId) => {
@@ -23,7 +28,7 @@ const About = () => {
       />
 
       {/* About Hero Section */}
-      <section className="pt-20 pb-16 relative overflow-hidden min-h-[700px] flex items-center">
+      <section ref={heroRef} className="pt-24 pb-16 relative overflow-hidden min-h-[700px] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -47,19 +52,20 @@ const About = () => {
       </section>
 
       {/* Chef Story Section */}
-      <section className="py-16 beige-gradient-vertical">
+      <section ref={aboutRef} className="py-16 beige-gradient-vertical">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="md:hidden flex justify-center mb-12">
-            <img
-              src={AboutMe}
-              alt="Chef Ashish Silwal"
-              className="rounded-full shadow-xl w-80 h-80 object-cover"
-            />
-          </div>
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            {" "}
-            {/* Changed from items-center to items-start */}
-            <div>
+            {/* Profile picture - shows first on mobile, second on desktop */}
+            <div className="text-center order-1 md:order-2">
+              <img
+                src="https://i.imgur.com/3r7iBuE.jpeg"
+                alt="Chef Ashish Silwal"
+                className="rounded-full shadow-xl w-full max-w-sm md:max-w-md mx-auto border-4 border-woodbrown-200"
+              />
+            </div>
+            
+            {/* Description content - shows second on mobile, first on desktop */}
+            <div className="order-2 md:order-1">
               <h2 className="text-3xl md:text-4xl font-bold text-woodbrown-800 mb-6 font-serif italic">
                 About Chef Ashish Silwal
               </h2>
@@ -79,7 +85,7 @@ const About = () => {
                 Australia.
               </p>
               <p className="text-lg text-woodbrown-700 mb-6">
-                Specialising in Italian and Modern Australian cuisine, I’ve
+                Specialising in Italian and Modern Australian cuisine, I've
                 gained valuable experience in both casual pizzerias and fine
                 dining establishments, shaping my approach to flavour,
                 technique, and hospitality.
@@ -111,13 +117,6 @@ const About = () => {
                 pizza ventures.
               </p>
             </div>
-            <div className="text-center">
-              <img
-                src="https://i.imgur.com/3r7iBuE.jpeg"
-                alt="Chef Ashish Silwal"
-                className="rounded-full shadow-xl w-full max-w-md mx-auto border-4 border-woodbrown-200"
-              />
-            </div>
           </div>
         </div>
       </section>
@@ -147,7 +146,7 @@ const About = () => {
       </section>
 
       {/* Our Mission Section */}
-      <section className="py-16 footer-gradient darker">
+      <section ref={certificateRef} className="py-16 footer-gradient darker">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-beigelight-100 mb-4 font-serif italic">

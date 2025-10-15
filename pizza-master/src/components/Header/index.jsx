@@ -141,10 +141,290 @@ const searchData = [
     link: "/about"
   },
   {
+    type: "Team",
+    label: "Owner",
+    description: "Meet the passionate owners behind Pizza Master & The Slice",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Team",
+    label: "Owners",
+    description: "Meet the passionate owners behind Pizza Master & The Slice",
+    link: "/gallery#our-work"
+  },
+  {
     type: "Location",
     label: "Adelaide, Australia",
     description: "Serving the Adelaide community with authentic pizza",
     link: "/#contact"
+  },
+
+  // Gallery Content - Our Pizzas
+  {
+    type: "Gallery",
+    label: "Our Pizzas Gallery",
+    description: "Beautiful display of our authentic Italian pizzas",
+    link: "/gallery#our-pizzas"
+  },
+  {
+    type: "Gallery",
+    label: "Margherita Pizza Photo",
+    description: "Classic Margherita with San Marzano tomatoes and fresh basil",
+    link: "/gallery#our-pizzas"
+  },
+  {
+    type: "Gallery",
+    label: "Pepperoni with Spicy Honey Photo",
+    description: "Spicy pepperoni finished with a drizzle of hot honey",
+    link: "/gallery#our-pizzas"
+  },
+  {
+    type: "Gallery",
+    label: "Vegetarian Pizza Photo",
+    description: "Fresh vegetables and herbs on our signature crust",
+    link: "/gallery#our-pizzas"
+  },
+  {
+    type: "Gallery",
+    label: "Nutella Pizza Photo",
+    description: "Sweet dessert pizza with Nutella and fresh strawberries",
+    link: "/gallery#our-pizzas"
+  },
+
+  // Pizza Types and Ingredients
+  {
+    type: "Menu",
+    label: "Margherita",
+    description: "Classic Margherita with San Marzano tomatoes and fresh basil",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Pepperoni",
+    description: "Spicy pepperoni with hot honey drizzle",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Vegetarian",
+    description: "Fresh vegetables and herbs on our signature crust",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Nutella",
+    description: "Sweet dessert pizza with Nutella and fresh strawberries",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Garlic Pizza",
+    description: "Fresh garlic sauce, fior di latte, and oregano",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Meat Feast",
+    description: "Rich BBQ sauce with pepperoni, ham, and roasted chicken",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Hawaiian",
+    description: "San Marzano tomato sauce, fior di latte mozzarella, ham and pineapple",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Truffle Mushroom",
+    description: "White base, fior di latte, mushroom, oregano, truffle oil, pecorino cheese",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Vegan Pizza",
+    description: "San Marzano tomato, olives, vegan cheese, mushroom, onion, extra virgin olive oil",
+    link: "/menu"
+  },
+  {
+    type: "Menu",
+    label: "Capricciosa",
+    description: "San Marzano tomato, fior di latte, mushroom, ham and olives",
+    link: "/menu"
+  },
+
+  // Gallery Content - Our Work
+  {
+    type: "Gallery",
+    label: "Our Work Gallery",
+    description: "Behind the scenes of our authentic pizza-making process",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Gallery",
+    label: "Pizza Station Setup",
+    description: "Our authentic wood-fired pizza oven where the magic happens",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Gallery",
+    label: "Wood-Fired Oven Setup",
+    description: "Our mobile wood-fired oven ready for action at your event",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Gallery",
+    label: "Pizza Preparation Station",
+    description: "Fresh ingredients and tools ready for authentic pizza creation",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Gallery",
+    label: "Chef in Action",
+    description: "Master chef demonstrating traditional pizza-making techniques",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Gallery",
+    label: "Mobile Kitchen Setup",
+    description: "Our fully equipped mobile pizza kitchen ready for any event",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Gallery",
+    label: "Event Service",
+    description: "Serving fresh, hot pizzas directly to your guests",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Gallery",
+    label: "Team at Work",
+    description: "Our dedicated team ensuring every pizza is perfect",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Gallery",
+    label: "Catering Setup",
+    description: "Professional catering setup for your special occasion",
+    link: "/gallery#our-work"
+  },
+
+  // Gallery Content - Our Videos
+  {
+    type: "Gallery",
+    label: "Our Videos Gallery",
+    description: "Watch our master chef in action creating authentic Italian pizzas",
+    link: "/gallery#our-videos"
+  },
+  {
+    type: "Gallery",
+    label: "Pizza Making Process Video",
+    description: "Watch Chef Ashish in action creating authentic wood-fired pizzas",
+    link: "/gallery#our-videos"
+  },
+
+  // Equipment and Setup Keywords
+  {
+    type: "Equipment",
+    label: "Wood-Fired Oven",
+    description: "Our authentic wood-fired pizza oven for traditional cooking",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Equipment",
+    label: "Mobile Oven",
+    description: "Our mobile wood-fired oven ready for any event",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Equipment",
+    label: "Pizza Oven",
+    description: "Professional wood-fired pizza oven setup",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Equipment",
+    label: "Preparation Station",
+    description: "Fresh ingredients and tools ready for authentic pizza creation",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Equipment",
+    label: "Mobile Kitchen",
+    description: "Our fully equipped mobile pizza kitchen ready for any event",
+    link: "/gallery#our-work"
+  },
+
+  // Ingredients Keywords
+  {
+    type: "Ingredients",
+    label: "San Marzano",
+    description: "Authentic San Marzano tomatoes used in our pizzas",
+    link: "/menu"
+  },
+  {
+    type: "Ingredients",
+    label: "Fior di Latte",
+    description: "Fresh fior di latte mozzarella cheese",
+    link: "/menu"
+  },
+  {
+    type: "Ingredients",
+    label: "Fresh Basil",
+    description: "Fresh basil leaves on our authentic pizzas",
+    link: "/menu"
+  },
+  {
+    type: "Ingredients",
+    label: "Truffle Oil",
+    description: "Premium truffle oil used in our specialty pizzas",
+    link: "/menu"
+  },
+  {
+    type: "Ingredients",
+    label: "Pecorino",
+    description: "Authentic Pecorino Romano cheese",
+    link: "/menu"
+  },
+
+  // Service Keywords
+  {
+    type: "Service",
+    label: "Event Service",
+    description: "Serving fresh, hot pizzas directly to your guests",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Service",
+    label: "Catering Service",
+    description: "Professional catering setup for your special occasion",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Service",
+    label: "Mobile Service",
+    description: "We bring our pizza truck directly to your location",
+    link: "/#catering"
+  },
+
+  // Team Keywords
+  {
+    type: "Team",
+    label: "Team",
+    description: "Our dedicated team ensuring every pizza is perfect",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Team",
+    label: "Staff",
+    description: "Our passionate team behind Pizza Master & The Slice",
+    link: "/gallery#our-work"
+  },
+  {
+    type: "Team",
+    label: "Chef Team",
+    description: "Our skilled chefs creating authentic Italian pizzas",
+    link: "/gallery#our-work"
   }
 ];
 
@@ -214,14 +494,14 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 navbar-gradient text-beigelight-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 py-2">
             <Link to="/" className="block">
               <img
                 src={PizzaMasterAndTheSliceLogo}
                 alt="Pizza Master & The Slice Logo"
-                className="h-16 w-16 rounded-full object-cover hover:opacity-80 transition-opacity cursor-pointer"
+                className="h-20 w-20 rounded-full object-cover hover:opacity-80 transition-opacity cursor-pointer"
               />
             </Link>
           </div>

@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { getNavigationItems } from '../Navigation';
 import PizzaMasterAndTheSliceLogo from "../../assets/PizzaMasterAndTheSliceLogo.png";
 
@@ -44,7 +44,7 @@ const Footer = ({ pageType = 'full', scrollToSection }) => {
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 text-beigelight-300" />
-                <span>silwal.ashish111@gmail.com</span>
+                <span>pizzamaster2632@gmail.com</span>
               </div>
               <div className="flex items-center">
                 <Phone className="w-5 h-5 mr-3 text-beigelight-300" />
@@ -89,9 +89,12 @@ const Footer = ({ pageType = 'full', scrollToSection }) => {
             </div>
 
             <div className="space-y-2">
-              <button className="block w-full bg-woodbrown-600 hover:bg-woodbrown-700 text-beigelight-50 font-bold py-3 px-6 rounded-lg transition-colors mb-2">
+              <Link 
+                to="/gallery#our-work"
+                className="block w-full bg-woodbrown-600 hover:bg-woodbrown-700 text-beigelight-50 font-bold py-3 px-6 rounded-lg transition-colors mb-2 text-center"
+              >
                 VIEW OUR SETUP
-              </button>
+              </Link>
               {/* <button 
                 onClick={() => navigate('/booking')}
                 className="block w-full bg-woodbrown-500 hover:bg-woodbrown-600 text-beigelight-50 font-bold py-3 px-6 rounded-lg transition-colors"

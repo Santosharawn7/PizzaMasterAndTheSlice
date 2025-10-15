@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pizzamasterandtheslice.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all pages for better SEO
+Allow: /menu
+Allow: /gallery
+Allow: /about
+Allow: /booking

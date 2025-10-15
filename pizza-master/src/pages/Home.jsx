@@ -9,9 +9,16 @@ import Story from '../components/Story';
 import Footer from '../components/Footer';
 import ChatWidget from '../components/ChatWidget';
 import { getNavigationItems } from '../components/Navigation';
+import { useScrollAnimation, useStaggerAnimation } from '../hooks/useScrollAnimation';
 
 const Home = () => {
   const [activeSection, setActiveSection] = useState('home');
+
+  // GSAP Scroll Animation refs
+  const cateringRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
+  const servicesRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
+  const menuRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
+  const storyRef = useScrollAnimation({ animation: 'fadeInUp', delay: 0.2 });
 
   // Navigation items are now handled by the centralized Navigation component
 
@@ -52,11 +59,19 @@ const Home = () => {
         scrollToSection={scrollToSection} 
       />
       <Hero />
-      <Catering />
-      <Services />
-      <Menu />
+      <div ref={cateringRef}>
+        <Catering />
+      </div>
+      <div ref={servicesRef}>
+        <Services />
+      </div>
+      <div ref={menuRef}>
+        <Menu />
+      </div>
       {/* <Reviews /> */}
-      <Story />
+      <div ref={storyRef}>
+        <Story />
+      </div>
       <Footer 
         pageType="home" 
         scrollToSection={scrollToSection} 
