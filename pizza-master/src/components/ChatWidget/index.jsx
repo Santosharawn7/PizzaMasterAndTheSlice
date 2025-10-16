@@ -300,6 +300,25 @@ export default function ChatWidget() {
     setSearchQuery("");
   };
 
+  // Function to get the correct Messenger link based on device
+  const getMessengerLink = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+    const isIOS = /iphone|ipad|ipod/i.test(userAgent);
+    const isAndroid = /android/i.test(userAgent);
+    
+    if (isIOS) {
+      // For iOS, try to open in Messenger app first, fallback to web
+      return 'https://m.me/774891612364601';
+    } else if (isAndroid) {
+      // For Android, try to open in Messenger app first, fallback to web
+      return 'https://m.me/774891612364601';
+    } else {
+      // For desktop, use web version
+      return 'https://m.me/774891612364601';
+    }
+  };
+
   // Function to render clickable social media links
   const renderMessageWithLinks = (text) => {
     const socialLinks = {
@@ -307,7 +326,7 @@ export default function ChatWidget() {
       'Pizza Master & The Slice': 'https://www.facebook.com/profile.php?id=61578603166709',
       '@pizzamaster.and.t': 'https://www.tiktok.com/@pizzamaster.and.t',
       'pizzamaster2632@gmail.com': 'mailto:pizzamaster2632@gmail.com',
-      'Chat with us': 'https://www.messenger.com/t/774891612364601'
+      'Chat with us': getMessengerLink()
     };
 
     let processedText = text;
@@ -569,7 +588,7 @@ export default function ChatWidget() {
                 <p className="text-sm text-woodbrown-700">Contact us on</p>
               </div>
               <a
-                href="https://m.me/61578603166709"
+                href={getMessengerLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
