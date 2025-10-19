@@ -4,6 +4,7 @@ import About from './pages/About';
 import Menu from './pages/Menu';
 import Gallery from './pages/Gallery';
 import BookingPage from './pages/Booking';
+import TestAppointment from './pages/TestAppointment';
 import Booking from './components/Booking';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/booking" element={<BookingPage />} />
+        <Route path="/test-appointment" element={<TestAppointment />} />
       </Routes>
     </Router>
   );

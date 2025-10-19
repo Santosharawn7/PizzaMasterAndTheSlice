@@ -11,7 +11,7 @@ const Menu = () => {
       minGuests: 30,
       duration: "2 hours",
       features: ["7 Pizza Varieties", "Unlimited Pizzas", "Dessert"],
-      image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image: "https://i.imgur.com/0SHQFSh.jpeg"
     },
     {
       id: "supreme",
@@ -22,7 +22,7 @@ const Menu = () => {
       minGuests: 30,
       duration: "2 hours",
       features: ["10 Pizza Varieties", "Unlimited Drinks", "Dessert"],
-      image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image: "https://i.imgur.com/lWT7FDh.jpeg"
     },
     {
       id: "deluxe",
@@ -33,7 +33,7 @@ const Menu = () => {
       minGuests: 40,
       duration: "2 hours",
       features: ["11 Pizza Varieties", "Antipasto Platter", "Unlimited Drinks", "Dessert"],
-      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+      image: "https://i.imgur.com/nht9EsV.jpeg"
     }
   ];
 
