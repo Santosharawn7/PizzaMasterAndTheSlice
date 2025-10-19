@@ -1,12 +1,23 @@
-import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
-import { useNavigate, Link } from 'react-router-dom';
-import { getNavigationItems } from '../Navigation';
+import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
+import { getNavigationItems } from "../Navigation";
 import PizzaMasterAndTheSliceLogo from "../../assets/PizzaMasterAndTheSliceLogo.png";
+import AppointmentDrawer from "../AppointmentForm";
 
-const Footer = ({ pageType = 'full', scrollToSection }) => {
+const Footer = ({ pageType = "full", scrollToSection }) => {
   // Get navigation items from centralized component
   const navItems = getNavigationItems(pageType);
   const navigate = useNavigate();
+  const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
+
+  const handleBookNow = () => {
+    setIsAppointmentOpen(true);
+  };
+
+  const handleCloseAppointment = () => {
+    setIsAppointmentOpen(false);
+  };
   return (
     <footer id="contact" className="footer-gradient text-beigelight-100 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,8 +30,12 @@ const Footer = ({ pageType = 'full', scrollToSection }) => {
                 className="w-20 h-20 rounded-full object-cover mr-4"
               />
               <div>
-                <h3 className="text-2xl font-bold text-beigelight-100">Pizza Master </h3>
-                <h3 className="text-xl font-bold text-beigelight-100">& The Slice</h3>
+                <h3 className="text-2xl font-bold text-beigelight-100">
+                  Pizza Master{" "}
+                </h3>
+                <h3 className="text-xl font-bold text-beigelight-100">
+                  & The Slice
+                </h3>
               </div>
             </div>
 
@@ -82,25 +97,29 @@ const Footer = ({ pageType = 'full', scrollToSection }) => {
                 className="text-beigelight-300 hover:text-beigelight-100 transition-colors"
                 aria-label="TikTok"
               >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                 </svg>
               </a>
             </div>
 
             <div className="space-y-2">
-              <Link 
+              <Link
                 to="/gallery#our-work"
                 className="block w-full bg-woodbrown-600 hover:bg-woodbrown-700 text-beigelight-50 font-bold py-3 px-6 rounded-lg transition-colors mb-2 text-center"
               >
                 VIEW OUR SETUP
               </Link>
-              {/* <button 
-                onClick={() => navigate('/booking')}
+              <button
+                onClick={handleBookNow}
                 className="block w-full bg-woodbrown-500 hover:bg-woodbrown-600 text-beigelight-50 font-bold py-3 px-6 rounded-lg transition-colors"
               >
                 BOOK NOW
-              </button> */}
+              </button>
             </div>
           </div>
         </div>
@@ -111,6 +130,12 @@ const Footer = ({ pageType = 'full', scrollToSection }) => {
           </p>
         </div>
       </div>
+
+      {/* Appointment Drawer */}
+      <AppointmentDrawer
+        isOpen={isAppointmentOpen}
+        onClose={handleCloseAppointment}
+      />
     </footer>
   );
 };
