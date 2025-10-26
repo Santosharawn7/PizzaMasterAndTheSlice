@@ -125,9 +125,17 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
         </div>
 
         <div className="border-t border-woodbrown-700 mt-12 pt-8 text-center">
-          <p className="text-beigelight-400">
-            Copyright © 2025 Pizza Master & The Slice | All rights reserved
-          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <p className="text-beigelight-400">
+              Copyright © 2025 Pizza Master & The Slice | All rights reserved
+            </p>
+            <Link
+              to="/privacy-policy"
+              className="text-beigelight-400 hover:text-beigelight-200 transition-colors underline"
+            >
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
 
