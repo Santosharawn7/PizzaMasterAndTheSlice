@@ -1,22 +1,81 @@
-import { useState } from 'react';
-import { Menu, X, Instagram, Facebook, Search, ChevronDown } from 'lucide-react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { getNavigationItems } from '../Navigation';
+import { useState } from "react";
+import {
+  Menu,
+  X,
+  Instagram,
+  Facebook,
+  Search,
+  ChevronDown,
+} from "lucide-react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { getNavigationItems } from "../Navigation";
 import PizzaMasterAndTheSliceLogo from "../../assets/PizzaMasterAndTheSliceLogo.png";
 
 // Searchable content for Pizza Master & The Slice
 const searchData = [
   // Navigation pages
   ...[
-    { type: "Page", label: 'Home', link: '/', description: 'Welcome to Pizza Master & The Slice' },
-    { type: "Page", label: 'About', link: '/about', description: 'Learn about Chef Ashish and our story' },
-    { type: "Page", label: 'Menu', link: '/menu', description: 'View our complete pizza menu' },
-    { type: "Page", label: 'Gallery', link: '/gallery', description: 'Visual journey through our authentic Italian pizza experience' },
-    { type: "Page", label: 'Catering', link: '/#catering', description: 'Mobile pizza catering services' },
-    { type: "Page", label: 'Services', link: '/#services', description: 'Our pizza services and offerings' },
-    { type: "Page", label: 'Reviews', link: '/#reviews', description: 'Customer reviews and testimonials' },
-    { type: "Page", label: 'Our Story', link: '/#story', description: 'Chef Ashish Silwal\'s journey' },
-    { type: "Page", label: 'Contact', link: '/#contact', description: 'Get in touch with us' },
+    {
+      type: "Page",
+      label: "Home",
+      link: "/",
+      description: "Welcome to Pizza Master & The Slice",
+    },
+    {
+      type: "Page",
+      label: "About",
+      link: "/about",
+      description: "Learn about Chef Ashish and our story",
+    },
+    {
+      type: "Page",
+      label: "Menu",
+      link: "/menu",
+      description: "View our complete pizza menu",
+    },
+    {
+      type: "Page",
+      label: "Gallery",
+      link: "/gallery",
+      description:
+        "Visual journey through our authentic Italian pizza experience",
+    },
+    {
+      type: "Page",
+      label: "Terms and Conditions",
+      link: "/terms",
+      description: "Purchase and cancellation policy",
+    },
+    {
+      type: "Page",
+      label: "Catering",
+      link: "/#catering",
+      description: "Mobile pizza catering services",
+    },
+    {
+      type: "Page",
+      label: "Services",
+      link: "/#services",
+      description: "Our pizza services and offerings",
+    },
+    {
+      type: "Page",
+      label: "Reviews",
+      link: "/#reviews",
+      description: "Customer reviews and testimonials",
+    },
+    {
+      type: "Page",
+      label: "Our Story",
+      link: "/#story",
+      description: "Chef Ashish Silwal's journey",
+    },
+    {
+      type: "Page",
+      label: "Contact",
+      link: "/#contact",
+      description: "Get in touch with us",
+    },
   ],
 
   // Pizza types and menu items
@@ -24,87 +83,98 @@ const searchData = [
     type: "Pizza",
     label: "Garlic Pizza",
     description: "Fresh garlic sauce, fior di latte, and oregano",
-    link: "/menu#garlic-pizza"
+    link: "/menu#garlic-pizza",
   },
   {
     type: "Pizza",
     label: "Margherita Pizza",
-    description: "San Marzano tomato sauce, Pecorino Romano, fior di latte mozzarella, fresh basil",
-    link: "/menu#margherita"
+    description:
+      "San Marzano tomato sauce, Pecorino Romano, fior di latte mozzarella, fresh basil",
+    link: "/menu#margherita",
   },
   {
     type: "Pizza",
     label: "The Meat Feast",
-    description: "Rich BBQ sauce, layered with creamy fior di latte mozzarella, spicy pepperoni, succulent ham, and tender roasted chicken",
-    link: "/menu#meat-feast"
+    description:
+      "Rich BBQ sauce, layered with creamy fior di latte mozzarella, spicy pepperoni, succulent ham, and tender roasted chicken",
+    link: "/menu#meat-feast",
   },
   {
     type: "Pizza",
     label: "Pepperoni with Spicy Honey",
-    description: "Napoli sauce, fior di latte mozzarella, spicy pepperoni, finished with a drizzle of hot honey",
-    link: "/menu#pepperoni-spicy-honey"
+    description:
+      "Napoli sauce, fior di latte mozzarella, spicy pepperoni, finished with a drizzle of hot honey",
+    link: "/menu#pepperoni-spicy-honey",
   },
   {
     type: "Pizza",
     label: "Pizzamaster Special",
-    description: "Creamy fior di latte, slices of mortadella, topped with fresh buffalo mozzarella and finished with pistachio pesto and basil",
-    link: "/menu#pizzamaster-special"
+    description:
+      "Creamy fior di latte, slices of mortadella, topped with fresh buffalo mozzarella and finished with pistachio pesto and basil",
+    link: "/menu#pizzamaster-special",
   },
   {
     type: "Pizza",
     label: "Hawaiian Pizza",
-    description: "San Marzano tomato sauce, fior di latte mozzarella, ham and pineapple",
-    link: "/menu#hawaiian"
+    description:
+      "San Marzano tomato sauce, fior di latte mozzarella, ham and pineapple",
+    link: "/menu#hawaiian",
   },
   {
     type: "Pizza",
     label: "Vegetarian Pizza",
-    description: "San Marzano tomato, olives, mushroom, onion, fior di latte, basil",
-    link: "/menu#vegetarian"
+    description:
+      "San Marzano tomato, olives, mushroom, onion, fior di latte, basil",
+    link: "/menu#vegetarian",
   },
   {
     type: "Pizza",
     label: "Truffle Mushroom Pizza",
-    description: "White base, fior di latte, mushroom, oregano, truffle oil, pecorino cheese",
-    link: "/menu#truffle-mushroom"
+    description:
+      "White base, fior di latte, mushroom, oregano, truffle oil, pecorino cheese",
+    link: "/menu#truffle-mushroom",
   },
   {
     type: "Pizza",
     label: "Vegan Pizza",
-    description: "San Marzano tomato, olives, vegan cheese, mushroom, onion, extra virgin olive oil",
-    link: "/menu#vegan"
+    description:
+      "San Marzano tomato, olives, vegan cheese, mushroom, onion, extra virgin olive oil",
+    link: "/menu#vegan",
   },
   {
     type: "Pizza",
     label: "Capricciosa Pizza",
     description: "San Marzano tomato, fior di latte, mushroom, ham and olives",
-    link: "/menu#capricciosa"
+    link: "/menu#capricciosa",
   },
   {
     type: "Pizza",
     label: "Nutella Pizza",
     description: "With strawberry and chocolate sauce",
-    link: "/menu#nutella"
+    link: "/menu#nutella",
   },
 
   // Pizza Packages
   {
     type: "Package",
     label: "THE DELUXE Package",
-    description: "Premium experience with antipasto platter, unlimited drinks, and dessert - $45.99 per person",
-    link: "/menu#deluxe"
+    description:
+      "Premium experience with antipasto platter, unlimited drinks, and dessert - $45.99 per person",
+    link: "/menu#deluxe",
   },
   {
     type: "Package",
     label: "THE SUPREME Package",
-    description: "Perfect balance of premium pizzas, drinks, and dessert - $35.99 per person",
-    link: "/menu#supreme"
+    description:
+      "Perfect balance of premium pizzas, drinks, and dessert - $35.99 per person",
+    link: "/menu#supreme",
   },
   {
     type: "Package",
     label: "THE CLASSIC Package",
-    description: "Great value with unlimited pizzas and dessert - $29.99 per person",
-    link: "/menu#classic"
+    description:
+      "Great value with unlimited pizzas and dessert - $29.99 per person",
+    link: "/menu#classic",
   },
 
   // Services
@@ -112,25 +182,25 @@ const searchData = [
     type: "Service",
     label: "Mobile Pizza Catering",
     description: "Wood-fired pizza truck for events and parties",
-    link: "/#catering"
+    link: "/#catering",
   },
   {
     type: "Service",
     label: "Event Catering",
     description: "Professional pizza catering for special occasions",
-    link: "/#catering"
+    link: "/#catering",
   },
   {
     type: "Service",
     label: "Wedding Catering",
     description: "Elegant pizza catering for weddings",
-    link: "/#catering"
+    link: "/#catering",
   },
   {
     type: "Service",
     label: "Corporate Events",
     description: "Pizza catering for business events and meetings",
-    link: "/#catering"
+    link: "/#catering",
   },
 
   // Chef and business info
@@ -138,25 +208,25 @@ const searchData = [
     type: "Chef",
     label: "Chef Ashish Silwal",
     description: "Master pizza chef from Adelaide, Australia",
-    link: "/about"
+    link: "/about",
   },
   {
     type: "Team",
     label: "Owner",
     description: "Meet the passionate owners behind Pizza Master & The Slice",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Team",
     label: "Owners",
     description: "Meet the passionate owners behind Pizza Master & The Slice",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Location",
     label: "Adelaide, Australia",
     description: "Serving the Adelaide community with authentic pizza",
-    link: "/#contact"
+    link: "/#contact",
   },
 
   // Gallery Content - Our Pizzas
@@ -164,31 +234,31 @@ const searchData = [
     type: "Gallery",
     label: "Our Pizzas Gallery",
     description: "Beautiful display of our authentic Italian pizzas",
-    link: "/gallery#our-pizzas"
+    link: "/gallery#our-pizzas",
   },
   {
     type: "Gallery",
     label: "Margherita Pizza Photo",
     description: "Classic Margherita with San Marzano tomatoes and fresh basil",
-    link: "/gallery#our-pizzas"
+    link: "/gallery#our-pizzas",
   },
   {
     type: "Gallery",
     label: "Pepperoni with Spicy Honey Photo",
     description: "Spicy pepperoni finished with a drizzle of hot honey",
-    link: "/gallery#our-pizzas"
+    link: "/gallery#our-pizzas",
   },
   {
     type: "Gallery",
     label: "Vegetarian Pizza Photo",
     description: "Fresh vegetables and herbs on our signature crust",
-    link: "/gallery#our-pizzas"
+    link: "/gallery#our-pizzas",
   },
   {
     type: "Gallery",
     label: "Nutella Pizza Photo",
     description: "Sweet dessert pizza with Nutella and fresh strawberries",
-    link: "/gallery#our-pizzas"
+    link: "/gallery#our-pizzas",
   },
 
   // Pizza Types and Ingredients
@@ -196,61 +266,64 @@ const searchData = [
     type: "Menu",
     label: "Margherita",
     description: "Classic Margherita with San Marzano tomatoes and fresh basil",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Pepperoni",
     description: "Spicy pepperoni with hot honey drizzle",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Vegetarian",
     description: "Fresh vegetables and herbs on our signature crust",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Nutella",
     description: "Sweet dessert pizza with Nutella and fresh strawberries",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Garlic Pizza",
     description: "Fresh garlic sauce, fior di latte, and oregano",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Meat Feast",
     description: "Rich BBQ sauce with pepperoni, ham, and roasted chicken",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Hawaiian",
-    description: "San Marzano tomato sauce, fior di latte mozzarella, ham and pineapple",
-    link: "/menu"
+    description:
+      "San Marzano tomato sauce, fior di latte mozzarella, ham and pineapple",
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Truffle Mushroom",
-    description: "White base, fior di latte, mushroom, oregano, truffle oil, pecorino cheese",
-    link: "/menu"
+    description:
+      "White base, fior di latte, mushroom, oregano, truffle oil, pecorino cheese",
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Vegan Pizza",
-    description: "San Marzano tomato, olives, vegan cheese, mushroom, onion, extra virgin olive oil",
-    link: "/menu"
+    description:
+      "San Marzano tomato, olives, vegan cheese, mushroom, onion, extra virgin olive oil",
+    link: "/menu",
   },
   {
     type: "Menu",
     label: "Capricciosa",
     description: "San Marzano tomato, fior di latte, mushroom, ham and olives",
-    link: "/menu"
+    link: "/menu",
   },
 
   // Gallery Content - Our Work
@@ -258,69 +331,73 @@ const searchData = [
     type: "Gallery",
     label: "Our Work Gallery",
     description: "Behind the scenes of our authentic pizza-making process",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Gallery",
     label: "Pizza Station Setup",
     description: "Our authentic wood-fired pizza oven where the magic happens",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Gallery",
     label: "Wood-Fired Oven Setup",
     description: "Our mobile wood-fired oven ready for action at your event",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Gallery",
     label: "Pizza Preparation Station",
-    description: "Fresh ingredients and tools ready for authentic pizza creation",
-    link: "/gallery#our-work"
+    description:
+      "Fresh ingredients and tools ready for authentic pizza creation",
+    link: "/gallery#our-work",
   },
   {
     type: "Gallery",
     label: "Chef in Action",
-    description: "Master chef demonstrating traditional pizza-making techniques",
-    link: "/gallery#our-work"
+    description:
+      "Master chef demonstrating traditional pizza-making techniques",
+    link: "/gallery#our-work",
   },
   {
     type: "Gallery",
     label: "Mobile Kitchen Setup",
     description: "Our fully equipped mobile pizza kitchen ready for any event",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Gallery",
     label: "Event Service",
     description: "Serving fresh, hot pizzas directly to your guests",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Gallery",
     label: "Team at Work",
     description: "Our dedicated team ensuring every pizza is perfect",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Gallery",
     label: "Catering Setup",
     description: "Professional catering setup for your special occasion",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
 
   // Gallery Content - Our Videos
   {
     type: "Gallery",
     label: "Our Videos Gallery",
-    description: "Watch our master chef in action creating authentic Italian pizzas",
-    link: "/gallery#our-videos"
+    description:
+      "Watch our master chef in action creating authentic Italian pizzas",
+    link: "/gallery#our-videos",
   },
   {
     type: "Gallery",
     label: "Pizza Making Process Video",
-    description: "Watch Chef Ashish in action creating authentic wood-fired pizzas",
-    link: "/gallery#our-videos"
+    description:
+      "Watch Chef Ashish in action creating authentic wood-fired pizzas",
+    link: "/gallery#our-videos",
   },
 
   // Equipment and Setup Keywords
@@ -328,31 +405,32 @@ const searchData = [
     type: "Equipment",
     label: "Wood-Fired Oven",
     description: "Our authentic wood-fired pizza oven for traditional cooking",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Equipment",
     label: "Mobile Oven",
     description: "Our mobile wood-fired oven ready for any event",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Equipment",
     label: "Pizza Oven",
     description: "Professional wood-fired pizza oven setup",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Equipment",
     label: "Preparation Station",
-    description: "Fresh ingredients and tools ready for authentic pizza creation",
-    link: "/gallery#our-work"
+    description:
+      "Fresh ingredients and tools ready for authentic pizza creation",
+    link: "/gallery#our-work",
   },
   {
     type: "Equipment",
     label: "Mobile Kitchen",
     description: "Our fully equipped mobile pizza kitchen ready for any event",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
 
   // Ingredients Keywords
@@ -360,31 +438,31 @@ const searchData = [
     type: "Ingredients",
     label: "San Marzano",
     description: "Authentic San Marzano tomatoes used in our pizzas",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Ingredients",
     label: "Fior di Latte",
     description: "Fresh fior di latte mozzarella cheese",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Ingredients",
     label: "Fresh Basil",
     description: "Fresh basil leaves on our authentic pizzas",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Ingredients",
     label: "Truffle Oil",
     description: "Premium truffle oil used in our specialty pizzas",
-    link: "/menu"
+    link: "/menu",
   },
   {
     type: "Ingredients",
     label: "Pecorino",
     description: "Authentic Pecorino Romano cheese",
-    link: "/menu"
+    link: "/menu",
   },
 
   // Service Keywords
@@ -392,19 +470,19 @@ const searchData = [
     type: "Service",
     label: "Event Service",
     description: "Serving fresh, hot pizzas directly to your guests",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Service",
     label: "Catering Service",
     description: "Professional catering setup for your special occasion",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Service",
     label: "Mobile Service",
     description: "We bring our pizza truck directly to your location",
-    link: "/#catering"
+    link: "/#catering",
   },
 
   // Team Keywords
@@ -412,27 +490,27 @@ const searchData = [
     type: "Team",
     label: "Team",
     description: "Our dedicated team ensuring every pizza is perfect",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Team",
     label: "Staff",
     description: "Our passionate team behind Pizza Master & The Slice",
-    link: "/gallery#our-work"
+    link: "/gallery#our-work",
   },
   {
     type: "Team",
     label: "Chef Team",
     description: "Our skilled chefs creating authentic Italian pizzas",
-    link: "/gallery#our-work"
-  }
+    link: "/gallery#our-work",
+  },
 ];
 
-const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
+const Header = ({ pageType = "full", activeSection, scrollToSection }) => {
   // Get navigation items from centralized component
   const navItems = getNavigationItems(pageType);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [searchFocus, setSearchFocus] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [homeDropdownOpen, setHomeDropdownOpen] = useState(false);
@@ -440,13 +518,15 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
   const location = useLocation();
 
   // Search functionality
-  const filtered = search.trim().length > 0
-    ? searchData.filter(
-        (item) =>
-          item.label.toLowerCase().includes(search.toLowerCase()) ||
-          (item.description && item.description.toLowerCase().includes(search.toLowerCase()))
-      )
-    : [];
+  const filtered =
+    search.trim().length > 0
+      ? searchData.filter(
+          (item) =>
+            item.label.toLowerCase().includes(search.toLowerCase()) ||
+            (item.description &&
+              item.description.toLowerCase().includes(search.toLowerCase()))
+        )
+      : [];
 
   // Close mobile menus
   const closeMobile = () => {
@@ -458,11 +538,11 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
   // Toggle mobile search
   const toggleMobileSearch = () => {
     setIsMenuOpen(false); // Close nav if open
-    setMobileSearchOpen(prev => !prev);
+    setMobileSearchOpen((prev) => !prev);
     if (!mobileSearchOpen) {
       // Focus on input when opening
       setTimeout(() => {
-        const input = document.querySelector('#mobile-search-input');
+        const input = document.querySelector("#mobile-search-input");
         if (input) input.focus();
       }, 100);
     }
@@ -470,19 +550,19 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
 
   // Handle search result click
   const handleSearchResultClick = (item) => {
-    setSearch('');
+    setSearch("");
     setSearchFocus(false);
     setMobileSearchOpen(false);
-    
+
     // Handle navigation based on link type
-    if (item.link.startsWith('/#')) {
+    if (item.link.startsWith("/#")) {
       // Scroll to section on home page
-      navigate('/');
+      navigate("/");
       setTimeout(() => {
-        const sectionId = item.link.split('#')[1];
+        const sectionId = item.link.split("#")[1];
         const element = document.getElementById(sectionId);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }, 100);
     } else {
@@ -511,42 +591,43 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
             {navItems.map((item) => {
               const isActive =
                 activeSection === item.id ||
-                (item.id === 'about' && location.pathname === '/about') ||
-                (item.id === 'home' && location.pathname === '/') ||
-                (item.id === 'menu' && location.pathname === '/menu') ||
-                (item.id === 'gallery' && location.pathname === '/gallery');
+                (item.id === "about" && location.pathname === "/about") ||
+                (item.id === "home" && location.pathname === "/") ||
+                (item.id === "menu" && location.pathname === "/menu") ||
+                (item.id === "gallery" && location.pathname === "/gallery") ||
+                (item.id === "terms" && location.pathname === "/terms");
 
               // Special handling for Home dropdown
-              if (item.id === 'home') {
+              if (item.id === "home") {
                 return (
                   <div key={item.id} className="relative">
                     <button
                       onClick={() => {
-                        navigate('/');
+                        navigate("/");
                         setHomeDropdownOpen(!homeDropdownOpen);
                       }}
                       onMouseEnter={() => setHomeDropdownOpen(true)}
                       className={`text-sm font-medium transition-colors border-b-2 flex items-center space-x-1 ${
                         isActive
-                          ? 'text-beigelight-100 border-beigelight-300'
-                          : 'text-beigelight-300 border-transparent hover:text-beigelight-200'
+                          ? "text-beigelight-100 border-beigelight-300"
+                          : "text-beigelight-300 border-transparent hover:text-beigelight-200"
                       }`}
                     >
                       <span>{item.label}</span>
                       <ChevronDown className="w-3 h-3" />
                     </button>
-                    
+
                     {/* Home Dropdown Menu */}
                     {homeDropdownOpen && (
-                      <div 
+                      <div
                         className="absolute top-full left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-woodbrown-200 py-2 z-50"
                         onMouseEnter={() => setHomeDropdownOpen(true)}
                         onMouseLeave={() => setHomeDropdownOpen(false)}
                       >
                         <button
                           onClick={() => {
-                            navigate('/');
-                            scrollToSection('catering');
+                            navigate("/");
+                            scrollToSection("catering");
                             setHomeDropdownOpen(false);
                           }}
                           className="w-full text-left px-4 py-2 text-sm text-woodbrown-700 hover:bg-woodbrown-50 transition-colors"
@@ -555,8 +636,8 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                         </button>
                         <button
                           onClick={() => {
-                            navigate('/');
-                            scrollToSection('services');
+                            navigate("/");
+                            scrollToSection("services");
                             setHomeDropdownOpen(false);
                           }}
                           className="w-full text-left px-4 py-2 text-sm text-woodbrown-700 hover:bg-woodbrown-50 transition-colors"
@@ -565,8 +646,8 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                         </button>
                         <button
                           onClick={() => {
-                            navigate('/');
-                            scrollToSection('menu');
+                            navigate("/");
+                            scrollToSection("menu");
                             setHomeDropdownOpen(false);
                           }}
                           className="w-full text-left px-4 py-2 text-sm text-woodbrown-700 hover:bg-woodbrown-50 transition-colors"
@@ -575,8 +656,8 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                         </button>
                         <button
                           onClick={() => {
-                            navigate('/');
-                            scrollToSection('story');
+                            navigate("/");
+                            scrollToSection("story");
                             setHomeDropdownOpen(false);
                           }}
                           className="w-full text-left px-4 py-2 text-sm text-woodbrown-700 hover:bg-woodbrown-50 transition-colors"
@@ -593,16 +674,17 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                 <button
                   key={item.id}
                   onClick={() => {
-                    if (item.id === 'about') navigate('/about');
-                    else if (item.id === 'home') navigate('/');
-                    else if (item.id === 'menu') navigate('/menu');
-                    else if (item.id === 'gallery') navigate('/gallery');
+                    if (item.id === "about") navigate("/about");
+                    else if (item.id === "home") navigate("/");
+                    else if (item.id === "menu") navigate("/menu");
+                    else if (item.id === "gallery") navigate("/gallery");
+                    else if (item.id === "terms") navigate("/terms");
                     else scrollToSection(item.id);
                   }}
                   className={`text-sm font-medium transition-colors border-b-2 ${
                     isActive
-                      ? 'text-beigelight-100 border-beigelight-300'
-                      : 'text-beigelight-300 border-transparent hover:text-beigelight-200'
+                      ? "text-beigelight-100 border-beigelight-300"
+                      : "text-beigelight-300 border-transparent hover:text-beigelight-200"
                   }`}
                 >
                   {item.label}
@@ -627,12 +709,14 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                   onBlur={() => setTimeout(() => setSearchFocus(false), 120)}
                 />
               </div>
-              
+
               {/* Desktop Dropdown results */}
               {searchFocus && search.trim().length > 0 && (
                 <div className="absolute top-12 left-0 w-full bg-white shadow-lg rounded-md z-50 border border-gray-200 max-h-80 overflow-y-auto">
                   {filtered.length === 0 ? (
-                    <div className="p-4 text-gray-400 text-center">No results found.</div>
+                    <div className="p-4 text-gray-400 text-center">
+                      No results found.
+                    </div>
                   ) : (
                     filtered.map((item, i) => (
                       <button
@@ -641,11 +725,17 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                         onClick={() => handleSearchResultClick(item)}
                       >
                         <div className="flex flex-col">
-                          <span className="font-bold text-woodbrown-800 text-sm">{item.label}</span>
+                          <span className="font-bold text-woodbrown-800 text-sm">
+                            {item.label}
+                          </span>
                           {item.description && (
-                            <span className="text-gray-600 text-xs mt-1">{item.description}</span>
+                            <span className="text-gray-600 text-xs mt-1">
+                              {item.description}
+                            </span>
                           )}
-                          <span className="text-xs mt-1 text-woodbrown-600 font-medium">{item.type}</span>
+                          <span className="text-xs mt-1 text-woodbrown-600 font-medium">
+                            {item.type}
+                          </span>
                         </div>
                       </button>
                     ))
@@ -681,7 +771,7 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
               aria-label="TikTok"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
               </svg>
             </a>
           </div>
@@ -700,49 +790,57 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
             <button
               onClick={() => {
                 setMobileSearchOpen(false); // Close search if open
-                setIsMenuOpen(prev => !prev);
+                setIsMenuOpen((prev) => !prev);
               }}
               className="p-2 text-beigelight-300 hover:text-beigelight-100 transition-colors"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden rounded-b-lg shadow-lg border-t border-white/10"
-               style={{
-                 background:
-                   'linear-gradient(180deg, rgba(74,52,42,0.95) 0%, rgba(93,64,55,0.9) 100%)',
-                 backdropFilter: 'blur(6px)',
-                 WebkitBackdropFilter: 'blur(6px)'
-               }}>
+          <div
+            className="md:hidden rounded-b-lg shadow-lg border-t border-white/10"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(74,52,42,0.95) 0%, rgba(93,64,55,0.9) 100%)",
+              backdropFilter: "blur(6px)",
+              WebkitBackdropFilter: "blur(6px)",
+            }}
+          >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => {
                 // Special handling for Home dropdown in mobile
-                if (item.id === 'home') {
+                if (item.id === "home") {
                   return (
                     <div key={item.id}>
                       <button
                         onClick={() => {
-                          navigate('/');
+                          navigate("/");
                           setHomeDropdownOpen(!homeDropdownOpen);
                         }}
                         className="block w-full text-left px-3 py-2 text-base font-medium text-beigelight-300 hover:text-beigelight-100 hover:bg-white/5 rounded-md flex items-center justify-between"
                       >
                         <span>{item.label}</span>
-                        <ChevronDown className={`w-4 h-4 transition-transform ${homeDropdownOpen ? 'rotate-180' : ''}`} />
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform ${homeDropdownOpen ? "rotate-180" : ""}`}
+                        />
                       </button>
-                      
+
                       {/* Mobile Home Dropdown */}
                       {homeDropdownOpen && (
                         <div className="ml-4 mt-1 space-y-1">
                           <button
                             onClick={() => {
-                              navigate('/');
-                              scrollToSection('catering');
+                              navigate("/");
+                              scrollToSection("catering");
                               setHomeDropdownOpen(false);
                               setIsMenuOpen(false);
                             }}
@@ -752,8 +850,8 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                           </button>
                           <button
                             onClick={() => {
-                              navigate('/');
-                              scrollToSection('services');
+                              navigate("/");
+                              scrollToSection("services");
                               setHomeDropdownOpen(false);
                               setIsMenuOpen(false);
                             }}
@@ -763,8 +861,8 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                           </button>
                           <button
                             onClick={() => {
-                              navigate('/');
-                              scrollToSection('menu');
+                              navigate("/");
+                              scrollToSection("menu");
                               setHomeDropdownOpen(false);
                               setIsMenuOpen(false);
                             }}
@@ -774,8 +872,8 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                           </button>
                           <button
                             onClick={() => {
-                              navigate('/');
-                              scrollToSection('story');
+                              navigate("/");
+                              scrollToSection("story");
                               setHomeDropdownOpen(false);
                               setIsMenuOpen(false);
                             }}
@@ -793,10 +891,11 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                   <button
                     key={item.id}
                     onClick={() => {
-                      if (item.id === 'about') navigate('/about');
-                      else if (item.id === 'home') navigate('/');
-                      else if (item.id === 'menu') navigate('/menu');
-                      else if (item.id === 'gallery') navigate('/gallery');
+                      if (item.id === "about") navigate("/about");
+                      else if (item.id === "home") navigate("/");
+                      else if (item.id === "menu") navigate("/menu");
+                      else if (item.id === "gallery") navigate("/gallery");
+                      else if (item.id === "terms") navigate("/terms");
                       else scrollToSection(item.id);
                       setIsMenuOpen(false);
                     }}
@@ -834,8 +933,12 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                   className="text-beigelight-300 hover:text-beigelight-100 transition-colors"
                   aria-label="TikTok"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                   </svg>
                 </a>
               </div>
@@ -845,13 +948,15 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
 
         {/* Mobile Search Dropdown */}
         {mobileSearchOpen && (
-          <div className="md:hidden rounded-b-lg shadow-lg border-t border-white/10"
-               style={{
-                 background:
-                   'linear-gradient(180deg, rgba(74,52,42,0.95) 0%, rgba(93,64,55,0.9) 100%)',
-                 backdropFilter: 'blur(6px)',
-                 WebkitBackdropFilter: 'blur(6px)'
-               }}>
+          <div
+            className="md:hidden rounded-b-lg shadow-lg border-t border-white/10"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(74,52,42,0.95) 0%, rgba(93,64,55,0.9) 100%)",
+              backdropFilter: "blur(6px)",
+              WebkitBackdropFilter: "blur(6px)",
+            }}
+          >
             <div className="px-4 py-4">
               <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-md px-3 py-2 w-full focus-within:ring-2 focus-within:ring-beigelight-300 focus-within:bg-white/20">
                 <Search className="w-4 h-4 text-beigelight-300 mr-2" />
@@ -865,12 +970,14 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                   onFocus={() => setSearchFocus(true)}
                 />
               </div>
-              
+
               {/* Mobile Search Results */}
               {search.trim().length > 0 && (
                 <div className="mt-3 bg-white rounded-md border border-gray-200 max-h-80 overflow-y-auto">
                   {filtered.length === 0 ? (
-                    <div className="p-4 text-gray-400 text-center">No results found.</div>
+                    <div className="p-4 text-gray-400 text-center">
+                      No results found.
+                    </div>
                   ) : (
                     filtered.map((item, i) => (
                       <button
@@ -879,11 +986,17 @@ const Header = ({ pageType = 'full', activeSection, scrollToSection }) => {
                         onClick={() => handleSearchResultClick(item)}
                       >
                         <div className="flex flex-col">
-                          <span className="font-bold text-woodbrown-800 text-sm">{item.label}</span>
+                          <span className="font-bold text-woodbrown-800 text-sm">
+                            {item.label}
+                          </span>
                           {item.description && (
-                            <span className="text-gray-600 text-xs mt-1">{item.description}</span>
+                            <span className="text-gray-600 text-xs mt-1">
+                              {item.description}
+                            </span>
                           )}
-                          <span className="text-xs mt-1 text-woodbrown-600 font-medium">{item.type}</span>
+                          <span className="text-xs mt-1 text-woodbrown-600 font-medium">
+                            {item.type}
+                          </span>
                         </div>
                       </button>
                     ))

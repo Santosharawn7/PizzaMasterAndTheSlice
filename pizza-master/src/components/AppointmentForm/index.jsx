@@ -3,23 +3,44 @@ import { X } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
 /* ------------ phone helpers ------------ */
-const isValidAustralianPhone = (value) => {
-  if (!value) return false;
-  const compact = String(value).replace(/[^0-9+]/g, "");
-  const auMobile = /^(?:\+?61|0)4\d{8}$/;
-  const auLandline = /^(?:\+?61|0)(?:2|3|7|8)\d{8}$/;
-  return auMobile.test(compact) || auLandline.test(compact);
+const isValidAustralianPhone = (phoneCode, phoneNumber) => {
+  if (!phoneNumber) return false;
+  const cleanNumber = phoneNumber.replace(/[^0-9]/g, "");
+  
+  console.log('Phone validation:', { phoneCode, phoneNumber, cleanNumber, length: cleanNumber.length });
+  
+  if (phoneCode === "+61") {
+    // For +61, expect 9 digits (4xxxxxxxx for mobile, 2/3/7/8xxxxxxx for landline)
+    if (cleanNumber.length === 9) {
+      const auMobile = /^4\d{8}$/;
+      const auLandline = /^[2378]\d{8}$/;
+      const isValid = auMobile.test(cleanNumber) || auLandline.test(cleanNumber);
+      console.log('+61 validation result:', isValid);
+      return isValid;
+    }
+  } else if (phoneCode === "04") {
+    // For 04, expect 8 digits (Australian mobile numbers)
+    if (cleanNumber.length === 8) {
+      // Allow any 8-digit number for 04 format (more flexible for testing)
+      const isValid = /^\d{8}$/.test(cleanNumber);
+      console.log('04 validation result:', isValid);
+      return isValid;
+    }
+  }
+  console.log('Phone validation failed - no matching code or length');
+  return false;
 };
 
-const normalizeAustralianPhone = (value) => {
-  if (!value) return "";
-  const compact = String(value).replace(/[^0-9+]/g, "");
-  if (/^\+61\d{9}$/.test(compact)) return compact;
-  if (/^0\d{9}$/.test(compact) || /^0\d{9,10}$/.test(compact)) {
-    return "+61" + compact.slice(1);
+const normalizeAustralianPhone = (phoneCode, phoneNumber) => {
+  if (!phoneNumber) return "";
+  const cleanNumber = phoneNumber.replace(/[^0-9]/g, "");
+  
+  if (phoneCode === "+61") {
+    return "+61" + cleanNumber;
+  } else if (phoneCode === "04") {
+    return "+61" + cleanNumber; // Convert 04 to +61 format
   }
-  if (/^61\d{9}$/.test(compact)) return "+" + compact;
-  return compact;
+  return phoneCode + cleanNumber;
 };
 
 const formatAustralianForDisplay = (value) => {
@@ -63,6 +84,11 @@ const formatAustralianForDisplay = (value) => {
 
 const SERVICES = ["Catering", "Consulting", "Brand Collaborations"];
 
+const PHONE_CODES = [
+  { value: "+61", label: "+61" },
+  { value: "04", label: "04 Mob" }
+];
+
 export default function AppointmentDrawer({ isOpen, onClose }) {
   const [status, setStatus] = useState({ type: "", msg: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,6 +98,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    phoneCode: "+61",
     phone: "",
     email: "",
     day: "",
@@ -83,6 +110,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
     message: "",
     company: "",
     consent: false,
+    privacyAndTerms: false,
   });
 
   const days = useMemo(
@@ -118,7 +146,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
       case "lastName":
         return value.trim() ? "" : "Last name is required";
       case "phone":
-        return isValidAustralianPhone(value)
+        return isValidAustralianPhone(formData.phoneCode, value)
           ? ""
           : "Enter a valid Australian phone number";
       case "email":
@@ -141,6 +169,8 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
         return value.length >= 10 ? "" : "Tell us a bit more (10+ chars)";
       case "consent":
         return value ? "" : "Please accept the terms";
+      case "privacyAndTerms":
+        return value ? "" : "Please accept the Privacy Policy and Terms and Conditions";
       default:
         return "";
     }
@@ -198,8 +228,21 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
-
-    setFormData((prev) => ({ ...prev, [name]: newValue }));
+    
+    setFormData((prev) => {
+      const updated = { ...prev, [name]: newValue };
+      
+      // If phone code changes, truncate phone number if needed
+      if (name === "phoneCode" && prev.phone) {
+        if (newValue === "+61") {
+          updated.phone = prev.phone.slice(0, 9);
+        } else if (newValue === "04") {
+          updated.phone = prev.phone.slice(0, 8);
+        }
+      }
+      
+      return updated;
+    });
 
     if (touched[name]) {
       const error = validateField(name, newValue);
@@ -209,15 +252,23 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
 
   const handlePhoneChange = (e) => {
     const raw = e.target.value;
-    const cleaned = raw.replace(/(?!^)[^0-9]/g, "").replace(/^([^+0-9])+/g, "");
-    const withPlus = raw.trim().startsWith("+")
-      ? "+" + cleaned.replace(/^\+/, "")
-      : cleaned;
-
-    setFormData((prev) => ({ ...prev, phone: withPlus }));
+    // Only allow digits for the phone number part
+    const cleaned = raw.replace(/[^0-9]/g, "");
+    
+    // Limit digits based on phone code
+    let limitedNumber = cleaned;
+    if (formData.phoneCode === "+61") {
+      // For +61, limit to 9 digits (4xxxxxxxx for mobile, 2/3/7/8xxxxxxx for landline)
+      limitedNumber = cleaned.slice(0, 9);
+    } else if (formData.phoneCode === "04") {
+      // For 04, limit to 8 digits (4xxxxxxx for mobile)
+      limitedNumber = cleaned.slice(0, 8);
+    }
+    
+    setFormData((prev) => ({ ...prev, phone: limitedNumber }));
 
     if (touched.phone) {
-      const error = validateField("phone", withPlus);
+      const error = validateField("phone", limitedNumber);
       setErrors((prev) => ({ ...prev, phone: error }));
     }
   };
@@ -284,7 +335,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
       const templateParams = {
         firstName: formData.firstName,
         lastName: formData.lastName,
-        phone: normalizeAustralianPhone(formData.phone),
+        phone: normalizeAustralianPhone(formData.phoneCode, formData.phone),
         email: formData.email,
         date: `${formData.year}-${formData.month}-${formData.day}`,
         time: formData.time,
@@ -349,6 +400,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
       setFormData({
         firstName: "",
         lastName: "",
+        phoneCode: "+61",
         phone: "",
         email: "",
         day: "",
@@ -360,6 +412,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
         message: "",
         company: "",
         consent: false,
+        privacyAndTerms: false,
       });
       setErrors({});
       setTouched({});
@@ -460,16 +513,38 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
                   <label className="block text-sm font-semibold text-amber-900 mb-2">
                     Phone Number *
                   </label>
-                  <input
-                    type="tel"
-                    inputMode="tel"
-                    value={formatAustralianForDisplay(formData.phone)}
-                    onChange={handlePhoneChange}
-                    onBlur={handleBlur}
-                    name="phone"
-                    placeholder="+61 4xx xxx xxx"
-                    className="w-full px-4 py-3 bg-white border-2 border-yellow-600 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-yellow-700 transition-all"
-                  />
+                  <div className="flex gap-3">
+                    <select
+                      name="phoneCode"
+                      value={formData.phoneCode}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="px-4 py-3 pr-10 bg-white border-2 border-yellow-600 rounded-lg text-gray-900 focus:outline-none focus:border-yellow-700 transition-all w-[100px] text-sm font-medium appearance-none cursor-pointer"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                        backgroundPosition: 'right 8px center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: '16px'
+                      }}
+                    >
+                      {PHONE_CODES.map((code) => (
+                        <option key={code.value} value={code.value}>
+                          {code.label}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      inputMode="tel"
+                      value={formData.phone}
+                      onChange={handlePhoneChange}
+                      onBlur={handleBlur}
+                      name="phone"
+                      placeholder={formData.phoneCode === "+61" ? "4xx xxx xxx" : "4xxx xxxx"}
+                      maxLength={formData.phoneCode === "+61" ? 9 : 8}
+                      className="flex-1 px-4 py-3 bg-white border-2 border-yellow-600 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-yellow-700 transition-all text-sm"
+                    />
+                  </div>
                   {errors.phone && touched.phone && (
                     <p className="text-red-600 text-sm mt-1">{errors.phone}</p>
                   )}
@@ -485,7 +560,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="you@example.com"
-                    className="w-full px-4 py-3 bg-white border-2 border-yellow-600 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-yellow-700 transition-all"
+                    className="w-full px-4 py-3 bg-white border-2 border-yellow-600 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-yellow-700 transition-all text-sm"
                   />
                   {errors.email && touched.email && (
                     <p className="text-red-600 text-sm mt-1">{errors.email}</p>
@@ -702,10 +777,48 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
                 )}
               </div>
 
+              {/* Privacy Policy and Terms Checkbox */}
+              <div>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="privacyAndTerms"
+                    checked={formData.privacyAndTerms}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="w-4 h-4 mt-1 text-yellow-600 border-gray-300 rounded focus:ring-0"
+                  />
+                  <span className="text-gray-700 text-sm">
+                    I have read and agree to the{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 underline"
+                    >
+                      Privacy Policy
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="/terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 underline"
+                    >
+                      Terms and Conditions
+                    </a>
+                    . *
+                  </span>
+                </label>
+                {errors.privacyAndTerms && touched.privacyAndTerms && (
+                  <p className="text-red-600 text-sm mt-1">{errors.privacyAndTerms}</p>
+                )}
+              </div>
+
               {/* Submit Button */}
               <button
                 onClick={handleSubmit}
-                disabled={isSubmitting}
+                disabled={isSubmitting || !formData.consent || !formData.privacyAndTerms}
                 className="w-full bg-amber-700 hover:bg-amber-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 shadow-lg"
               >
                 {isSubmitting ? "Sending..." : "Send Enquiry"}

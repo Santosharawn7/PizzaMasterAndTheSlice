@@ -101,14 +101,14 @@ const faqData = [
   {
     id: 14,
     question: "What's your cheapest pizza?",
-    answer: "All our individual pizzas are priced at $25. For catering packages, our Classic package is $29.99 per person, which includes unlimited pizzas and dessert.",
+    answer: "All our individual pizzas are priced at $25. For catering packages, our Classic package is $24.99 AUD per person, which includes unlimited pizzas and dessert.",
     keywords: ["cheapest", "affordable", "price", "budget", "classic"],
     type: "menu"
   },
   {
     id: 15,
     question: "What packages do you offer?",
-    answer: "We offer three packages: THE DELUXE ($45.99/person) with antipasto platter, THE SUPREME ($35.99/person) with premium pizzas, and THE CLASSIC ($29.99/person) with unlimited pizzas. All include dessert and have 2-hour duration.",
+    answer: "We offer three packages: THE DELUXE ($39.99 AUD/person) with antipasto platter, THE SUPREME ($29.99 AUD/person) with premium pizzas, and THE CLASSIC ($24.99 AUD/person) with unlimited pizzas. All include dessert and have 2-hour duration.",
     keywords: ["packages", "deluxe", "supreme", "classic", "catering", "options"],
     type: "menu"
   },

@@ -44,7 +44,14 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
               {navItems.slice(1).map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => {
+                    // Navigate to page if it's a page route
+                    if (item.id === "about") navigate("/about");
+                    else if (item.id === "menu") navigate("/menu");
+                    else if (item.id === "gallery") navigate("/gallery");
+                    else if (item.id === "terms") navigate("/terms");
+                    else if (scrollToSection) scrollToSection(item.id);
+                  }}
                   className="block text-beigelight-300 hover:text-beigelight-100 transition-colors"
                 >
                   {item.label}
@@ -129,12 +136,21 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
             <p className="text-beigelight-400">
               Copyright © 2025 Pizza Master & The Slice | All rights reserved
             </p>
-            <Link
-              to="/privacy-policy"
-              className="text-beigelight-400 hover:text-beigelight-200 transition-colors underline"
-            >
-              Privacy Policy
-            </Link>
+            <div className="flex space-x-2 items-center">
+              <Link
+                to="/privacy-policy"
+                className="text-beigelight-400 hover:text-beigelight-200 transition-colors underline"
+              >
+                Privacy Policy
+              </Link>
+              <span className="text-beigelight-400">&</span>
+              <Link
+                to="/terms"
+                className="text-beigelight-400 hover:text-beigelight-200 transition-colors underline"
+              >
+                Terms & Conditions
+              </Link>
+            </div>
           </div>
         </div>
       </div>

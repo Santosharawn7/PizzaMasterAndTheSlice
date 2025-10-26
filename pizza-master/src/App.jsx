@@ -6,6 +6,7 @@ import Gallery from './pages/Gallery';
 import BookingPage from './pages/Booking';
 import TestAppointment from './pages/TestAppointment';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Terms from './pages/Terms';
 import Booking from './components/Booking';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/test-appointment" element={<TestAppointment />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </Router>
   );
