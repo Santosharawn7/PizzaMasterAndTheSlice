@@ -44,7 +44,14 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
               {navItems.slice(1).map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => {
+                    // Navigate to page if it's a page route
+                    if (item.id === "about") navigate("/about");
+                    else if (item.id === "menu") navigate("/menu");
+                    else if (item.id === "gallery") navigate("/gallery");
+                    else if (item.id === "terms") navigate("/terms");
+                    else if (scrollToSection) scrollToSection(item.id);
+                  }}
                   className="block text-beigelight-300 hover:text-beigelight-100 transition-colors"
                 >
                   {item.label}
