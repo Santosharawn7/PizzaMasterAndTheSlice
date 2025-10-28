@@ -114,7 +114,7 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
   });
 
   const days = useMemo(
-    () => Array.from({ length: 31 }, (_, i) => String(i + 1)),
+    () => Array.from({ length: 31 }, (_, i) => String(i + 1).padStart(2, '0')),
     []
   );
   const months = useMemo(
@@ -646,53 +646,56 @@ export default function AppointmentDrawer({ isOpen, onClose }) {
                   )}
               </div>
 
-              {/* Time Field */}
-              <div>
-                <label className="block text-sm font-semibold text-amber-900 mb-2">
-                  Preferred Time *
-                </label>
-                <input
-                  type="time"
-                  name="time"
-                  value={formData.time}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className="w-full px-4 py-3 bg-white border-2 border-yellow-600 rounded-lg text-black focus:outline-none focus:border-yellow-700 transition-all"
-                  min="09:00"
-                  max="18:00"
-                />
-                {errors.time && touched.time && (
-                  <p className="text-red-600 text-sm mt-1">{errors.time}</p>
-                )}
-              </div>
+              {/* Time and Package Fields */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Time Field */}
+                <div>
+                  <label className="block text-sm font-semibold text-amber-900 mb-2">
+                    Preferred Time *
+                  </label>
+                  <input
+                    type="time"
+                    name="time"
+                    value={formData.time}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="w-full px-4 py-3 bg-white border-2 border-yellow-600 rounded-lg text-black focus:outline-none focus:border-yellow-700 transition-all"
+                    min="09:00"
+                    max="18:00"
+                  />
+                  {errors.time && touched.time && (
+                    <p className="text-red-600 text-sm mt-1">{errors.time}</p>
+                  )}
+                </div>
 
-              {/* Package Selection */}
-              <div>
-                <label className="block text-sm font-semibold text-amber-900 mb-2">
-                  Packages *
-                </label>
-                <select
-                  name="package"
-                  value={formData.package}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className="w-full px-4 py-3 bg-white border-2 border-yellow-600 rounded-lg text-black focus:outline-none focus:border-yellow-700 transition-all appearance-none"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                    backgroundPosition: "right 0.5rem center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "1.5em 1.5em",
-                    paddingRight: "2.5rem",
-                  }}
-                >
-                  <option value="">Select a package</option>
-                  <option value="Classic">Classic</option>
-                  <option value="Supreme">Supreme</option>
-                  <option value="Deluxe">Deluxe</option>
-                </select>
-                {errors.package && touched.package && (
-                  <p className="text-red-600 text-sm mt-1">{errors.package}</p>
-                )}
+                {/* Package Selection */}
+                <div>
+                  <label className="block text-sm font-semibold text-amber-900 mb-2">
+                    Packages *
+                  </label>
+                  <select
+                    name="package"
+                    value={formData.package}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="w-full px-4 py-3 bg-white border-2 border-yellow-600 rounded-lg text-black focus:outline-none focus:border-yellow-700 transition-all appearance-none"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: "right 0.5rem center",
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "1.5em 1.5em",
+                      paddingRight: "2.5rem",
+                    }}
+                  >
+                    <option value="">Select a package</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Supreme">Supreme</option>
+                    <option value="Deluxe">Deluxe</option>
+                  </select>
+                  {errors.package && touched.package && (
+                    <p className="text-red-600 text-sm mt-1">{errors.package}</p>
+                  )}
+                </div>
               </div>
 
               {/* Services */}

@@ -105,10 +105,10 @@ const BookingPage = () => {
               <h3 className="text-xl font-bold text-woodbrown-800 mb-4">Phone</h3>
               <p className="text-woodbrown-700 mb-2">Call us directly for immediate assistance</p>
               <a 
-                href="tel:+61412345678" 
+                href="tel:+61451694448" 
                 className="text-woodbrown-600 hover:text-woodbrown-800 font-semibold"
               >
-                +61 412 345 678
+                0451 694 448
               </a>
             </div>
 
@@ -116,10 +116,10 @@ const BookingPage = () => {
               <h3 className="text-xl font-bold text-woodbrown-800 mb-4">Email</h3>
               <p className="text-woodbrown-700 mb-2">Send us your questions and we'll respond quickly</p>
               <a 
-                href="mailto:info@pizzamasterandtheslice.com.au" 
+                href="mailto:pizzamaster2632@gmail.com" 
                 className="text-woodbrown-600 hover:text-woodbrown-800 font-semibold"
               >
-                info@pizzamasterandtheslice.com.au
+                pizzamaster2632@gmail.com
               </a>
             </div>
           </div>

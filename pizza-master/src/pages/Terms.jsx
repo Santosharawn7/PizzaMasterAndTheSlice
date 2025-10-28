@@ -182,15 +182,32 @@ const Terms = () => {
               <div className="space-y-3">
                 <div className="flex items-center">
                   <span className="text-2xl mr-3">📧</span>
-                  <span className="text-lg text-woodbrown-700">pizzamaster2632@gmail.com</span>
+                  <a 
+                    href="mailto:pizzamaster2632@gmail.com"
+                    className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
+                  >
+                    pizzamaster2632@gmail.com
+                  </a>
                 </div>
                 <div className="flex items-center">
                   <span className="text-2xl mr-3">📞</span>
-                  <span className="text-lg text-woodbrown-700">0451 694 448</span>
+                  <a 
+                    href="tel:+61451694448"
+                    className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
+                  >
+                    0451 694 448
+                  </a>
                 </div>
                 <div className="flex items-center">
                   <span className="text-2xl mr-3">📍</span>
-                  <span className="text-lg text-woodbrown-700">Adelaide, Australia</span>
+                  <a 
+                    href="https://maps.google.com/maps?q=11+Temple+Rd,+Clare+SA+5453,+Australia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
+                  >
+                    11 Temple Rd, Clare SA 5453, Australia
+                  </a>
                 </div>
               </div>
             </div>

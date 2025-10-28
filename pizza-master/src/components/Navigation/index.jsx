@@ -44,6 +44,11 @@ export const getNavigationItems = (pageType = 'full') => {
       return navigationItems.filter(item => 
         ['home', 'about', 'menu', 'gallery', 'contact'].includes(item.id)
       );
+    case 'enquiry':
+      // Enquiry page has main navigation items
+      return navigationItems.filter(item => 
+        ['home', 'about', 'menu', 'gallery', 'contact'].includes(item.id)
+      );
     default:
       // Full navigation for all pages
       return navigationItems;

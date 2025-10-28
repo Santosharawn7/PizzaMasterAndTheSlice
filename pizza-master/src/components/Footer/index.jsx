@@ -66,15 +66,32 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 text-beigelight-300" />
-                <span>pizzamaster2632@gmail.com</span>
+                <a 
+                  href="mailto:pizzamaster2632@gmail.com"
+                  className="hover:text-beigelight-100 transition-colors"
+                >
+                  pizzamaster2632@gmail.com
+                </a>
               </div>
               <div className="flex items-center">
                 <Phone className="w-5 h-5 mr-3 text-beigelight-300" />
-                <span>0451 694 448</span>
+                <a 
+                  href="tel:+61451694448"
+                  className="hover:text-beigelight-100 transition-colors"
+                >
+                  0451 694 448
+                </a>
               </div>
               <div className="flex items-center">
                 <MapPin className="w-5 h-5 mr-3 text-beigelight-300" />
-                <span>Adelaide, Australia</span>
+                <a 
+                  href="https://maps.google.com/maps?q=11+Temple+Rd,+Clare+SA+5453,+Australia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-beigelight-100 transition-colors"
+                >
+                  11 Temple Rd, Clare SA 5453, Australia
+                </a>
               </div>
             </div>
 

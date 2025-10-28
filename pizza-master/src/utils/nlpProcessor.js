@@ -62,6 +62,8 @@ class PizzaMasterNLP {
       menuInquiry: ['menu', 'pizza', 'food', 'order', 'what do you have', 'what can i get', 'offer', 'serve', 'what pizzas'],
       pizzaSpecific: Object.keys(this.pizzaKeywords),
       contact: ['contact', 'email', 'phone', 'call', 'reach', 'get in touch', 'how to contact', 'social', 'socials', 'social links', 'facebook', 'instagram', 'tiktok', 'messenger'],
+      enquiry: ['enquiry', 'inquiry', 'ask', 'question', 'form', 'enquiry form', 'how to enquire', 'make enquiry', 'how to make enquiry', 'how can i enquire'],
+      booking: ['book', 'booking', 'reserve', 'schedule', 'appointment', 'how to book', 'make booking', 'reservation'],
       owner: ['owner', 'who owns', 'who is the owner', 'founder', 'who runs', 'proprietor'],
       chef: ['chef', 'ashish', 'who is the chef', 'tell me about chef', 'about chef'],
       location: ['location', 'where', 'address', 'adelaide', 'australia', 'based'],
@@ -87,9 +89,11 @@ class PizzaMasterNLP {
         "Goodbye! Don't hesitate to contact us if you need anything. Enjoy your day!"
       ],
       contact: "You can contact us at pizzamaster2632@gmail.com or through our social media:\n\n📧 Email: pizzamaster2632@gmail.com\n📷 Instagram: @pizzamaster_and_the_slice\n👥 Facebook: Pizza Master & The Slice\n🎵 TikTok: @pizzamaster.and.t\n💬 Messenger: Chat with us\n\nAll links are clickable and will take you directly to our social media pages!",
-      chef: "Chef Ashish Silwal is our master pizza chef from Adelaide, Australia. He brings authentic pizza-making expertise and passion to every pizza we create. You can learn more about him on our About page!",
-      owner: "The owners of Pizza Master & The Slice are passionate about bringing authentic Italian pizza to Adelaide. You can see them in our gallery! Meet the passionate owners behind Pizza Master & The Slice.",
-      location: "We are based in Adelaide, Australia, and serve the entire Adelaide community with our mobile pizza services. We bring our pizza truck directly to your location!",
+      enquiry: "You can make an enquiry through multiple ways:\n\n📝 **Enquiry Form**: Visit our enquiry page at /enquiry for a comprehensive form\n📧 **Email**: pizzamaster2632@gmail.com\n📞 **Phone**: 0451 694 448\n💬 **Messenger**: Chat with us directly\n\nWe'll respond promptly to discuss your event needs and provide a customized quote!",
+      booking: "To book our mobile pizza catering services, you can:\n\n1️⃣ **Enquiry Form**: Fill out our detailed enquiry form on the enquiry page\n2️⃣ **Email**: Send details to pizzamaster2632@gmail.com\n3️⃣ **Phone**: Call us at 0451 694 448\n4️⃣ **Messenger**: Message us on Facebook Messenger\n\nWe'll discuss your event details, menu preferences, and provide a customized quote for your special occasion!",
+      chef: "Chef Ashish Silwal is our master pizza chef from Clare, South Australia. He brings authentic pizza-making expertise and passion to every pizza we create. You can learn more about him on our About page!",
+      owner: "The owners of Pizza Master & The Slice are passionate about bringing authentic Italian pizza to Clare, South Australia. You can see them in our gallery! Meet the passionate owners behind Pizza Master & The Slice.",
+      location: "We are based in Clare, South Australia (11 Temple Rd, Clare SA 5453), and serve the entire Clare and surrounding areas with our mobile pizza services. We bring our pizza truck directly to your location!",
       catering: "Great! We offer mobile pizza catering services for events, weddings, and parties. Our wood-fired pizza truck brings authentic pizza directly to your location. Would you like to learn more about our catering services?",
       pricing: "Our pizza prices range from $18 to $30 depending on the type and ingredients. For example, Margherita is $18, Pepperoni is $22, and our Supreme pizza is $28. Our catering packages are: Classic ($24.99 AUD/person), Supreme ($29.99 AUD/person), and Deluxe ($39.99 AUD/person). Would you like to see our full menu with all prices?",
       process: "Our pizzas are made using traditional Italian methods with our wood-fired oven! We use authentic ingredients like San Marzano tomatoes, fior di latte mozzarella, fresh basil, and premium toppings. You can watch our chef in action in our videos!",
@@ -128,11 +132,15 @@ class PizzaMasterNLP {
       const processedText = this.preprocessText(text);
       const words = processedText.split(' ');
 
+      // Debug logging
+      console.log('NLP Debug - Input text:', text);
+      console.log('NLP Debug - Processed text:', processedText);
+
       // Check for specific intents with improved matching
       // Order matters - check more specific patterns first
       const orderedIntents = [
         'pizzaSpecific', 'process', 'gallery', 'video', 'catering', 'owner', 'chef', 'contact',
-        'menuInquiry', 'pricing', 'ingredients', 'location', 'faq', 'greeting', 'farewell'
+        'enquiry', 'booking', 'menuInquiry', 'pricing', 'ingredients', 'location', 'faq', 'greeting', 'farewell'
       ];
 
       for (const intent of orderedIntents) {
@@ -140,6 +148,7 @@ class PizzaMasterNLP {
         for (const keyword of keywords) {
           // Exact match
           if (processedText.includes(keyword)) {
+            console.log('NLP Debug - Intent detected:', intent, 'Keyword:', keyword);
             return { intent, keyword, confidence: 0.9 };
           }
           
@@ -239,6 +248,8 @@ class PizzaMasterNLP {
         'pricing': "/menu",
         'catering': "/#catering",
         'process': "/gallery#our-videos",
+        'enquiry': "/enquiry",
+        'booking': "/enquiry",
         'faq': null // Special case
       };
 
