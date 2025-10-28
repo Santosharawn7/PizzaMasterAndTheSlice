@@ -43,7 +43,7 @@ const Menu = () => {
     {
       id: "classic",
       name: "THE CLASSIC",
-      price: "$29.99",
+      price: "$24.99 AUD",
       perPerson: true,
       description: "The Classic includes unlimited selection of pizzas, and dessert. The package is available for a duration of 2 hours and requires a minimum of 30 guests.",
       deliveryInfo: "We also accept delivery and takeaway orders with a minimum of 25 pizzas. Each pizza is priced at $25.",
@@ -58,7 +58,7 @@ const Menu = () => {
     {
       id: "supreme",
       name: "THE SUPREME",
-      price: "$35.99",
+      price: "$29.99 AUD",
       perPerson: true,
       description: "The Supreme includes unlimited soft drinks, a selection of premium pizzas, and dessert. The package is available for a duration of 2 hours and requires a minimum of 30 guests.",
       deliveryInfo: "We also accept delivery and takeaway orders with a minimum of 25 pizzas. Each pizza is priced at $25.",
@@ -74,7 +74,7 @@ const Menu = () => {
     {
       id: "deluxe",
       name: "THE DELUXE",
-      price: "$45.99",
+      price: "$39.99 AUD",
       perPerson: true,
       description: "The Deluxe includes unlimited soft drinks, a selection of premium pizzas, an antipasto platter, and dessert. The package is available for a duration of 2 hours and requires a minimum of 40 guests.",
       deliveryInfo: "We also accept delivery and takeaway orders with a minimum of 25 pizzas. Each pizza is priced at $25.",

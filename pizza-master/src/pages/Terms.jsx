@@ -40,25 +40,28 @@ const Terms = () => {
 
         <div className="absolute bottom-0 left-0 right-0 z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center w-full pb-2">
-            <h1 className="text-5xl md:text-6xl font-bold text-beigelight-100 mb-4 font-serif italic drop-shadow-lg">
-              Terms and Conditions
+            <h1 className="text-4xl md:text-5xl font-bold text-beigelight-100 mb-4 font-serif italic drop-shadow-lg">
+              🍕 Terms and Conditions
             </h1>
+            <p className="text-lg md:text-xl text-beigelight-200 max-w-3xl mx-auto drop-shadow-md">
+              Pizza Master & The Slice
+            </p>
           </div>
         </div>
       </section>
 
       {/* Terms Content Section */}
       <section ref={contentRef} className="py-16 beige-gradient-vertical">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Purchase & Cancellation Policy */}
-          <div className="bg-white border border-gray-200 p-8 rounded-lg shadow-lg mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-woodbrown-800 mb-6 font-serif italic">
+          <div className="bg-white rounded-lg shadow-lg p-8 space-y-8">
+            <h2 className="text-2xl font-bold text-woodbrown-800 mb-4 font-serif italic">
               Purchase & Cancellation Policy
             </h2>
 
             {/* 1. Pre-Orders */}
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-woodbrown-700 mb-3">
+            <div>
+              <h3 className="text-xl font-bold text-woodbrown-800 mb-3">
                 1. Pre-Orders
               </h3>
               <p className="text-lg text-woodbrown-700">
@@ -69,11 +72,11 @@ const Terms = () => {
             </div>
 
             {/* 2. Payment Policy */}
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-woodbrown-700 mb-3">
+            <div>
+              <h3 className="text-xl font-bold text-woodbrown-800 mb-3">
                 2. Payment Policy
               </h3>
-              <ul className="list-disc list-inside text-lg text-woodbrown-700 space-y-2">
+              <ul className="list-disc list-inside text-lg text-woodbrown-700 space-y-2 ml-4">
                 <li>
                   A 50% advance payment is required to confirm all bookings for
                   private events or large orders.
@@ -95,11 +98,11 @@ const Terms = () => {
             </div>
 
             {/* 3. Cancellation and Refund Policy */}
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-woodbrown-700 mb-3">
+            <div>
+              <h3 className="text-xl font-bold text-woodbrown-800 mb-3">
                 3. Cancellation and Refund Policy
               </h3>
-              <ul className="list-disc list-inside text-lg text-woodbrown-700 space-y-2">
+              <ul className="list-disc list-inside text-lg text-woodbrown-700 space-y-2 ml-4">
                 <li>
                   Due to the upfront preparation required for private events and
                   catering, all sales are final.
@@ -120,11 +123,11 @@ const Terms = () => {
             </div>
 
             {/* 4. No-Show and Late Payment Policy */}
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-woodbrown-700 mb-3">
+            <div>
+              <h3 className="text-xl font-bold text-woodbrown-800 mb-3">
                 4. No-Show and Late Payment Policy
               </h3>
-              <ul className="list-disc list-inside text-lg text-woodbrown-700 space-y-2">
+              <ul className="list-disc list-inside text-lg text-woodbrown-700 space-y-2 ml-4">
                 <li>
                   If full payment is not received prior to the event start time,
                   the booking may be cancelled without refund.
@@ -137,11 +140,11 @@ const Terms = () => {
             </div>
 
             {/* 5. Liability Disclaimer */}
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-woodbrown-700 mb-3">
+            <div>
+              <h3 className="text-xl font-bold text-woodbrown-800 mb-3">
                 5. Liability Disclaimer
               </h3>
-              <ul className="list-disc list-inside text-lg text-woodbrown-700 space-y-2">
+              <ul className="list-disc list-inside text-lg text-woodbrown-700 space-y-2 ml-4">
                 <li>
                   Pizza Master & The Slice and its staff are not responsible for
                   any personal belongings lost or damaged during an event or on
@@ -155,8 +158,8 @@ const Terms = () => {
             </div>
 
             {/* 6. Agreement */}
-            <div className="mb-4">
-              <h3 className="text-2xl font-bold text-woodbrown-700 mb-3">
+            <div>
+              <h3 className="text-xl font-bold text-woodbrown-800 mb-3">
                 6. Agreement
               </h3>
               <p className="text-lg text-woodbrown-700">
@@ -168,38 +171,44 @@ const Terms = () => {
           </div>
 
           {/* Contact Us Section */}
-          <div className="bg-white border border-gray-200 p-8 rounded-lg shadow-lg">
-            <h2 className="text-3xl md:text-4xl font-bold text-woodbrown-800 mb-6 font-serif italic text-center">
+          <div className="bg-white rounded-lg shadow-lg p-8 space-y-8">
+            <h2 className="text-2xl font-bold text-woodbrown-800 mb-4 font-serif italic">
               Contact Us
             </h2>
-            <div className="text-center space-y-4">
-              <div>
-                <h3 className="text-xl font-bold text-woodbrown-700 mb-2">
-                  Pizza Master & The Slice
-                </h3>
-                <p className="text-lg text-woodbrown-700">
-                  📍 Adelaide, Australia
-                </p>
-              </div>
-              <div className="space-y-2">
-                <p className="text-lg text-woodbrown-700">
-                  📧{" "}
-                  <a
+            <p className="text-lg text-woodbrown-700 mb-4">
+              If you have questions or concerns about these terms, please contact us at:
+            </p>
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+              <div className="space-y-3">
+                <div className="flex items-center">
+                  <span className="text-2xl mr-3">📧</span>
+                  <a 
                     href="mailto:pizzamaster2632@gmail.com"
-                    className="hover:text-woodbrown-900 underline"
+                    className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
                   >
                     pizzamaster2632@gmail.com
                   </a>
-                </p>
-                <p className="text-lg text-woodbrown-700">
-                  📞{" "}
-                  <a
-                    href="tel:0451694448"
-                    className="hover:text-woodbrown-900 underline"
+                </div>
+                <div className="flex items-center">
+                  <span className="text-2xl mr-3">📞</span>
+                  <a 
+                    href="tel:+61451694448"
+                    className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
                   >
                     0451 694 448
                   </a>
-                </p>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-2xl mr-3">📍</span>
+                  <a 
+                    href="https://maps.google.com/maps?q=11+Temple+Rd,+Clare+SA+5453,+Australia"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
+                  >
+                    11 Temple Rd, Clare SA 5453, Australia
+                  </a>
+                </div>
               </div>
             </div>
           </div>

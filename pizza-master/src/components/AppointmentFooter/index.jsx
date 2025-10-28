@@ -29,7 +29,12 @@ const AppointmentFooter = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-beigelight-100 mb-2">Call Us</h3>
-            <p className="text-beigelight-200">+1 (555) 123-4567</p>
+            <a 
+              href="tel:+61451694448"
+              className="text-beigelight-200 hover:text-beigelight-100 transition-colors"
+            >
+              0451 694 448
+            </a>
           </div>
 
           <div className="text-center">
@@ -39,7 +44,12 @@ const AppointmentFooter = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-beigelight-100 mb-2">Email Us</h3>
-            <p className="text-beigelight-200">info@pizzamaster.com</p>
+            <a 
+              href="mailto:pizzamaster2632@gmail.com"
+              className="text-beigelight-200 hover:text-beigelight-100 transition-colors"
+            >
+              pizzamaster2632@gmail.com
+            </a>
           </div>
 
           <div className="text-center">
@@ -50,7 +60,14 @@ const AppointmentFooter = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-beigelight-100 mb-2">Visit Us</h3>
-            <p className="text-beigelight-200">123 Pizza Street, Food City</p>
+            <a 
+              href="https://maps.google.com/maps?q=11+Temple+Rd,+Clare+SA+5453,+Australia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-beigelight-200 hover:text-beigelight-100 transition-colors"
+            >
+              11 Temple Rd, Clare SA 5453, Australia
+            </a>
           </div>
         </div>
 

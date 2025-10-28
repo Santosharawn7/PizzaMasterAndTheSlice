@@ -5,7 +5,7 @@ const Menu = () => {
     {
       id: "classic",
       name: "THE CLASSIC",
-      price: "$29.99",
+      price: "$24.99 AUD",
       perPerson: true,
       description: "Great value with unlimited pizzas and dessert",
       minGuests: 30,
@@ -16,7 +16,7 @@ const Menu = () => {
     {
       id: "supreme",
       name: "THE SUPREME",
-      price: "$35.99",
+      price: "$29.99 AUD",
       perPerson: true,
       description: "Perfect balance of premium pizzas, drinks, and dessert",
       minGuests: 30,
@@ -27,7 +27,7 @@ const Menu = () => {
     {
       id: "deluxe",
       name: "THE DELUXE",
-      price: "$45.99",
+      price: "$39.99 AUD",
       perPerson: true,
       description: "Premium experience with antipasto platter, unlimited drinks, and dessert",
       minGuests: 40,
