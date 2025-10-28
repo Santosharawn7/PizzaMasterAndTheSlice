@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { processChatQuery } from '../../utils/nlpProcessor';
 
@@ -24,15 +24,15 @@ const faqData = [
   {
     id: 3,
     question: "Where are you located?",
-    answer: "We are based in Adelaide, Australia, and serve the entire Adelaide community with our mobile pizza services.",
-    keywords: ["location", "adelaide", "australia", "serve", "community"],
+    answer: "We are based in Clare, South Australia (11 Temple Rd, Clare SA 5453), and serve the entire Clare and surrounding areas with our mobile pizza services.",
+    keywords: ["location", "clare", "south australia", "adelaide", "australia", "serve", "community", "temple rd"],
     type: "location"
   },
   {
     id: 4,
     question: "Who is Chef Ashish Silwal?",
-    answer: "Chef Ashish Silwal is our master pizza chef from Adelaide, Australia. He brings authentic pizza-making expertise and passion to every pizza we create.",
-    keywords: ["chef", "ashish", "silwal", "master", "authentic", "expertise"],
+    answer: "Chef Ashish Silwal is our master pizza chef from Clare, South Australia. He brings authentic pizza-making expertise and passion to every pizza we create.",
+    keywords: ["chef", "ashish", "silwal", "master", "authentic", "expertise", "clare", "south australia"],
     type: "chef"
   },
   {
@@ -52,8 +52,8 @@ const faqData = [
   {
     id: 7,
     question: "How do I book your catering services?",
-    answer: "You can contact us through our Facebook page or call us directly. We'll discuss your event needs, menu preferences, and provide a customized quote for your special occasion.",
-    keywords: ["book", "catering", "contact", "facebook", "event", "quote", "booking"],
+    answer: "You can book our catering services through multiple ways: 1) Fill out our enquiry form on the enquiry page, 2) Email us at pizzamaster2632@gmail.com, 3) Call us at 0451 694 448, or 4) Message us on Facebook Messenger. We'll discuss your event needs, menu preferences, and provide a customized quote for your special occasion.",
+    keywords: ["book", "catering", "contact", "facebook", "event", "quote", "booking", "enquiry", "email", "phone", "messenger"],
     type: "service"
   },
   {
@@ -101,14 +101,14 @@ const faqData = [
   {
     id: 14,
     question: "What's your cheapest pizza?",
-    answer: "All our individual pizzas are priced at $25. For catering packages, our Classic package is $29.99 per person, which includes unlimited pizzas and dessert.",
+    answer: "All our individual pizzas are priced at $25. For catering packages, our Classic package is $24.99 AUD per person, which includes unlimited pizzas and dessert.",
     keywords: ["cheapest", "affordable", "price", "budget", "classic"],
     type: "menu"
   },
   {
     id: 15,
     question: "What packages do you offer?",
-    answer: "We offer three packages: THE DELUXE ($45.99/person) with antipasto platter, THE SUPREME ($35.99/person) with premium pizzas, and THE CLASSIC ($29.99/person) with unlimited pizzas. All include dessert and have 2-hour duration.",
+    answer: "We offer three packages: THE DELUXE ($39.99 AUD/person) with antipasto platter, THE SUPREME ($29.99 AUD/person) with premium pizzas, and THE CLASSIC ($24.99 AUD/person) with unlimited pizzas. All include dessert and have 2-hour duration.",
     keywords: ["packages", "deluxe", "supreme", "classic", "catering", "options"],
     type: "menu"
   },
@@ -122,9 +122,30 @@ const faqData = [
   {
     id: 17,
     question: "What's your most expensive package?",
-    answer: "Our THE DELUXE package is $45.99 per person and includes 11 pizza varieties, antipasto platter, unlimited drinks, and dessert. It requires a minimum of 40 guests.",
+    answer: "Our THE DELUXE package is $39.99 AUD per person and includes 11 pizza varieties, antipasto platter, unlimited drinks, and dessert. It requires a minimum of 40 guests.",
     keywords: ["expensive", "deluxe", "premium", "highest", "cost"],
     type: "menu"
+  },
+  {
+    id: 18,
+    question: "How can I make an enquiry?",
+    answer: "You can make an enquiry through our dedicated enquiry page at /enquiry, contact us via email at pizzamaster2632@gmail.com, call us at 0451 694 448, or use our Facebook Messenger chat. We'll respond promptly to discuss your event needs!",
+    keywords: ["enquiry", "inquiry", "ask", "question", "contact", "email", "phone", "messenger"],
+    type: "contact"
+  },
+  {
+    id: 19,
+    question: "Do you have an enquiry form?",
+    answer: "Yes! We have a comprehensive enquiry form on our enquiry page where you can provide details about your event, preferred date, time, guest count, and package preferences. You can also contact us directly via email or phone.",
+    keywords: ["enquiry form", "form", "event details", "date", "time", "guests", "package"],
+    type: "contact"
+  },
+  {
+    id: 20,
+    question: "How do I book your services?",
+    answer: "To book our mobile pizza catering services, you can: 1) Fill out our enquiry form on the enquiry page, 2) Email us at pizzamaster2632@gmail.com, 3) Call us at 0451 694 448, or 4) Message us on Facebook Messenger. We'll discuss your event details and provide a customized quote.",
+    keywords: ["book", "booking", "reserve", "schedule", "catering", "services", "quote"],
+    type: "service"
   }
 ];
 
@@ -132,6 +153,7 @@ export default function ChatWidget() {
   const [isMessengerWebview, setIsMessengerWebview] = useState(false);
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
   const navigate = useNavigate();
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     // Check if we're in Messenger webview
@@ -270,6 +292,15 @@ export default function ChatWidget() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showFAQs, setShowFAQs] = useState(false);
   const [filteredFAQs, setFilteredFAQs] = useState(faqData);
+
+  // Auto-scroll to bottom when new messages are added
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   // Search FAQ functionality
   const searchFAQs = (query) => {
@@ -578,6 +609,7 @@ export default function ChatWidget() {
                 </div>
               </div>
             ))}
+            <div ref={messagesEndRef} />
           </div>
 
           {/* Messenger Link */}

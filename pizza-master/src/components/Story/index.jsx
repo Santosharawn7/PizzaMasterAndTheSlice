@@ -12,7 +12,7 @@ const Story = () => {
             </h2>
             <p className="text-lg text-beigelight-200 mb-6">
               Meet Chef Ashish Silwal, the passionate pizza master behind Pizza Master & The Slice. 
-              Originally from Adelaide, Australia, Ashish has dedicated his life to perfecting the 
+              Originally from Clare, South Australia, Ashish has dedicated his life to perfecting the 
               art of wood-fired pizza making.
             </p>
             <p className="text-lg text-beigelight-200 mb-6">

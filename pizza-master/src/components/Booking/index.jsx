@@ -70,7 +70,7 @@ export const BookingWidget = ({
           prefill: {
             customAnswers: {
               a1: 'Pizza Master & The Slice - Mobile Catering Inquiry',
-              a2: 'Adelaide, Australia'
+              a2: 'Clare, South Australia'
             }
           },
           utm: {
