@@ -83,7 +83,7 @@ const Enquiry = () => {
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                 <h3 className="text-xl font-bold text-woodbrown-800 mb-2">THE CLASSIC</h3>
-                <p className="text-2xl font-bold text-woodbrown-600 mb-2">$24.99 AUD</p>
+                <p className="text-2xl font-bold text-woodbrown-600 mb-2">$29.99 AUD</p>
                 <p className="text-sm text-woodbrown-700">per person</p>
                 <ul className="text-sm text-woodbrown-700 mt-3 space-y-1">
                   <li>• Unlimited pizzas</li>
@@ -95,10 +95,10 @@ const Enquiry = () => {
 
               <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                 <h3 className="text-xl font-bold text-woodbrown-800 mb-2">THE SUPREME</h3>
-                <p className="text-2xl font-bold text-woodbrown-600 mb-2">$29.99 AUD</p>
+                <p className="text-2xl font-bold text-woodbrown-600 mb-2">$34.99 AUD</p>
                 <p className="text-sm text-woodbrown-700">per person</p>
                 <ul className="text-sm text-woodbrown-700 mt-3 space-y-1">
-                  <li>• Premium pizzas</li>
+                  <li>• Unlimited pizzas</li>
                   <li>• Unlimited drinks</li>
                   <li>• Dessert included</li>
                   <li>• Min 30 guests</li>
@@ -110,7 +110,7 @@ const Enquiry = () => {
                 <p className="text-2xl font-bold text-woodbrown-600 mb-2">$39.99 AUD</p>
                 <p className="text-sm text-woodbrown-700">per person</p>
                 <ul className="text-sm text-woodbrown-700 mt-3 space-y-1">
-                  <li>• Premium pizzas</li>
+                  <li>• Unlimited pizzas</li>
                   <li>• Antipasto platter</li>
                   <li>• Unlimited drinks</li>
                   <li>• Min 40 guests</li>
