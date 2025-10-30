@@ -173,7 +173,7 @@ const searchData = [
     type: "Package",
     label: "THE CLASSIC Package",
     description:
-      "Great value with unlimited pizzas and dessert - $29.99 per person",
+      "Great value with unlimited pizzas and dessert - $29.99 AUD per person",
     link: "/menu#classic",
   },
 

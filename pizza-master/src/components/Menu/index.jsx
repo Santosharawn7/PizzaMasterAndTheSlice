@@ -5,7 +5,7 @@ const Menu = () => {
     {
       id: "classic",
       name: "THE CLASSIC",
-      price: "$24.99 AUD",
+      price: "$29.99 AUD",
       perPerson: true,
       description: "Great value with unlimited pizzas and dessert",
       minGuests: 30,
@@ -16,12 +16,12 @@ const Menu = () => {
     {
       id: "supreme",
       name: "THE SUPREME",
-      price: "$29.99 AUD",
+      price: "$34.99 AUD",
       perPerson: true,
-      description: "Perfect balance of premium pizzas, drinks, and dessert",
+      description: "Perfect balance with unlimited pizzas, drinks, and dessert",
       minGuests: 30,
       duration: "2 hours",
-      features: ["10 Pizza Varieties", "Unlimited Drinks", "Dessert"],
+      features: ["10 Pizza Varieties", "Unlimited Pizzas", "Unlimited Drinks", "Dessert"],
       image: "https://i.imgur.com/lWT7FDh.jpeg"
     },
     {
@@ -29,10 +29,10 @@ const Menu = () => {
       name: "THE DELUXE",
       price: "$39.99 AUD",
       perPerson: true,
-      description: "Premium experience with antipasto platter, unlimited drinks, and dessert",
+      description: "Premium experience with unlimited pizzas, antipasto platter, drinks, and dessert",
       minGuests: 40,
       duration: "2 hours",
-      features: ["11 Pizza Varieties", "Antipasto Platter", "Unlimited Drinks", "Dessert"],
+      features: ["11 Pizza Varieties", "Unlimited Pizzas", "Antipasto Platter", "Unlimited Drinks", "Dessert"],
       image: "https://i.imgur.com/nht9EsV.jpeg"
     }
   ];
@@ -59,10 +59,10 @@ const Menu = () => {
                   alt={pkg.name}
                   className="w-full h-48 object-cover"
                 />
-                <div className="absolute top-4 right-4 bg-woodbrown-600 text-white px-3 py-1 rounded-full text-sm font-bold">
-                  {pkg.price} {pkg.perPerson && <span className="text-xs">pp</span>}
+                <div className="absolute top-4 right-4 bg-woodbrown-600 text-white px-4 py-2 rounded-full text-base font-bold">
+                  {pkg.price}
                 </div>
-                <div className="absolute top-4 left-4 bg-beigelight-200 text-woodbrown-800 px-2 py-1 rounded text-xs font-medium">
+                <div className="absolute top-4 left-4 bg-beigelight-200 text-woodbrown-800 px-3 py-2 rounded text-sm font-medium">
                   Min {pkg.minGuests} guests
                 </div>
               </div>

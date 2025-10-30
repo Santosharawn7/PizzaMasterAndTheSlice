@@ -26,12 +26,12 @@ const Hero = () => {
           We'll bring the wood-fired pizza truck to you! Book our mobile pizza catering service for unforgettable events
         </p>
                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                 {/* <Link
-                   to="/booking"
+                 <Link
+                   to="/enquiry"
                    className="inline-block bg-woodbrown-600 hover:bg-woodbrown-700 text-beigelight-50 font-bold py-4 px-8 rounded-lg transition-colors"
                  >
                    BOOK NOW
-                 </Link> */}
+                 </Link>
                  <Link
                    to="/menu"
                    className="inline-block bg-transparent border-2 border-beigelight-100 text-beigelight-100 hover:bg-beigelight-100 hover:text-woodbrown-800 font-bold py-4 px-8 rounded-lg transition-colors"
