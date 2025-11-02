@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import RegularMenuDrawer from '../RegularMenuDrawer';
 
 const Hero = () => {
+  const [isRegularMenuOpen, setIsRegularMenuOpen] = useState(false);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center">
       <div
@@ -38,8 +42,20 @@ const Hero = () => {
                  >
                    VIEW MENU
                  </Link>
+                 <button
+                   onClick={() => setIsRegularMenuOpen(true)}
+                   className="inline-block bg-gradient-to-r from-woodbrown-600 to-woodbrown-700 hover:from-woodbrown-700 hover:to-woodbrown-800 text-beigelight-50 font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                 >
+                   VIEW REGULAR MENU
+                 </button>
                </div>
       </div>
+
+      {/* Regular Menu Drawer */}
+      <RegularMenuDrawer
+        isOpen={isRegularMenuOpen}
+        onClose={() => setIsRegularMenuOpen(false)}
+      />
     </section>
   );
 };
