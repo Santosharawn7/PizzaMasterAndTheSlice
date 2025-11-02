@@ -595,7 +595,8 @@ const Header = ({ pageType = "full", activeSection, scrollToSection }) => {
                 (item.id === "home" && location.pathname === "/") ||
                 (item.id === "menu" && location.pathname === "/menu") ||
                 (item.id === "gallery" && location.pathname === "/gallery") ||
-                (item.id === "terms" && location.pathname === "/terms");
+                (item.id === "terms" && location.pathname === "/terms") ||
+                (location.pathname === "/regular-menu");
 
               // Special handling for Home dropdown
               if (item.id === "home") {
