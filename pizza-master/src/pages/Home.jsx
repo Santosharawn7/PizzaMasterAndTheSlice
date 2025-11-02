@@ -4,7 +4,7 @@ import Hero from '../components/Hero';
 import Catering from '../components/Catering';
 import Services from '../components/Services';
 import Menu from '../components/Menu';
-// import Reviews from '../components/Reviews';
+import Reviews from '../components/Reviews';
 import Story from '../components/Story';
 import Footer from '../components/Footer';
 import ChatWidget from '../components/ChatWidget';
@@ -68,7 +68,7 @@ const Home = () => {
       <div ref={menuRef}>
         <Menu />
       </div>
-      {/* <Reviews /> */}
+      <Reviews />
       <div ref={storyRef}>
         <Story />
       </div>
