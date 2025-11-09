@@ -40,7 +40,7 @@ const Hero = () => {
                    to="/menu"
                    className="inline-block bg-transparent border-2 border-beigelight-100 text-beigelight-100 hover:bg-beigelight-100 hover:text-woodbrown-800 font-bold py-4 px-8 rounded-lg transition-colors"
                  >
-                   VIEW MENU
+                   VIEW EVENT MENU
                  </Link>
                  <button
                    onClick={() => setIsRegularMenuOpen(true)}
