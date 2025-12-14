@@ -90,7 +90,7 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
                   rel="noopener noreferrer"
                   className="hover:text-beigelight-100 transition-colors"
                 >
-                  11 Temple Rd, Clare SA 5453, Australia
+                  Duffield Avenue Munnopara, Adelaide SA 5115, Australia
                 </a>
               </div>
             </div>

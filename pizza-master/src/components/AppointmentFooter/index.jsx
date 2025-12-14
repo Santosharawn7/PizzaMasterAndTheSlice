@@ -66,7 +66,7 @@ const AppointmentFooter = () => {
               rel="noopener noreferrer"
               className="text-beigelight-200 hover:text-beigelight-100 transition-colors"
             >
-              11 Temple Rd, Clare SA 5453, Australia
+              Duffield Avenue Munnopara, Adelaide SA 5115, Australia
             </a>
           </div>
         </div>
