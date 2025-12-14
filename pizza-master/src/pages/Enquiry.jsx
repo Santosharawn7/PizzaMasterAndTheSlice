@@ -169,7 +169,7 @@ const Enquiry = () => {
                       rel="noopener noreferrer"
                       className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
                     >
-                      11 Temple Rd, Clare SA 5453, Australia
+                      Duffield Avenue Munnopara, Adelaide SA 5115, Australia
                     </a>
                   </div>
                   <div className="flex items-center justify-center">
