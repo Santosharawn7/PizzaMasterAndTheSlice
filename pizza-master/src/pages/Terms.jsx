@@ -176,13 +176,14 @@ const Terms = () => {
               Contact Us
             </h2>
             <p className="text-lg text-woodbrown-700 mb-4">
-              If you have questions or concerns about these terms, please contact us at:
+              If you have questions or concerns about these terms, please
+              contact us at:
             </p>
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
               <div className="space-y-3">
                 <div className="flex items-center">
                   <span className="text-2xl mr-3">📧</span>
-                  <a 
+                  <a
                     href="mailto:pizzamaster2632@gmail.com"
                     className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
                   >
@@ -191,7 +192,7 @@ const Terms = () => {
                 </div>
                 <div className="flex items-center">
                   <span className="text-2xl mr-3">📞</span>
-                  <a 
+                  <a
                     href="tel:+61451694448"
                     className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
                   >
@@ -200,7 +201,7 @@ const Terms = () => {
                 </div>
                 <div className="flex items-center">
                   <span className="text-2xl mr-3">📍</span>
-                  <a 
+                  <a
                     href="https://maps.google.com/maps?q=11+Temple+Rd,+Clare+SA+5453,+Australia"
                     target="_blank"
                     rel="noopener noreferrer"

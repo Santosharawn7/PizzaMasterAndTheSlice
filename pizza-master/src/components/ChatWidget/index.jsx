@@ -24,15 +24,15 @@ const faqData = [
   {
     id: 3,
     question: "Where are you located?",
-    answer: "We are based in Clare, South Australia (11 Temple Rd, Clare SA 5453), and serve the entire Clare and surrounding areas with our mobile pizza services.",
-    keywords: ["location", "clare", "south australia", "adelaide", "australia", "serve", "community", "temple rd"],
+    answer: "We are based in Adelaide, South Australia (Duffield Avenue Munnopara, Adelaide SA 5115), and serve the entire Adelaide and surrounding areas with our mobile pizza services.",
+    keywords: ["location", "adelaide", "south australia", "adelaide", "australia", "serve", "community", "temple rd"],
     type: "location"
   },
   {
     id: 4,
     question: "Who is Chef Ashish Silwal?",
-    answer: "Chef Ashish Silwal is our master pizza chef from Clare, South Australia. He brings authentic pizza-making expertise and passion to every pizza we create.",
-    keywords: ["chef", "ashish", "silwal", "master", "authentic", "expertise", "clare", "south australia"],
+    answer: "Chef Ashish Silwal is our master pizza chef from Adelaide, South Australia. He brings authentic pizza-making expertise and passion to every pizza we create.",
+    keywords: ["chef", "ashish", "silwal", "master", "authentic", "expertise", "adelaide", "south australia"],
     type: "chef"
   },
   {
