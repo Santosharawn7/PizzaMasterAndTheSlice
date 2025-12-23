@@ -163,14 +163,9 @@ const Enquiry = () => {
                 <div className="text-center">
                   <div className="flex items-center justify-center mb-2">
                     <span className="text-2xl mr-3">📍</span>
-                    <a 
-                      href="https://maps.google.com/maps?q=11+Temple+Rd,+Clare+SA+5453,+Australia"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-lg text-woodbrown-700 hover:text-woodbrown-900 transition-colors"
-                    >
+                    <span className="text-lg text-woodbrown-700">
                       Duffield Avenue Munnopara, Adelaide SA 5115, Australia
-                    </a>
+                    </span>
                   </div>
                   <div className="flex items-center justify-center">
                     <a 
