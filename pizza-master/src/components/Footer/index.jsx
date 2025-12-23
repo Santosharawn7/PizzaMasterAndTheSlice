@@ -66,7 +66,7 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
             <div className="space-y-4 mb-8">
               <div className="flex items-center">
                 <Mail className="w-5 h-5 mr-3 text-beigelight-300" />
-                <a 
+                <a
                   href="mailto:pizzamaster2632@gmail.com"
                   className="hover:text-beigelight-100 transition-colors"
                 >
@@ -75,7 +75,7 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
               </div>
               <div className="flex items-center">
                 <Phone className="w-5 h-5 mr-3 text-beigelight-300" />
-                <a 
+                <a
                   href="tel:+61451694448"
                   className="hover:text-beigelight-100 transition-colors"
                 >
@@ -84,14 +84,9 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
               </div>
               <div className="flex items-center">
                 <MapPin className="w-5 h-5 mr-3 text-beigelight-300" />
-                <a 
-                  href="https://maps.google.com/maps?q=11+Temple+Rd,+Clare+SA+5453,+Australia"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-beigelight-100 transition-colors"
-                >
+                <span className="text-beigelight-200">
                   Duffield Avenue Munnopara, Adelaide SA 5115, Australia
-                </a>
+                </span>
               </div>
             </div>
 

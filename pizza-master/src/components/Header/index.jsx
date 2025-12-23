@@ -207,7 +207,7 @@ const searchData = [
   {
     type: "Chef",
     label: "Chef Ashish Silwal",
-    description: "Master pizza chef from Clare, South Australia",
+    description: "Master pizza chef from Adelaide, South Australia",
     link: "/about",
   },
   {
@@ -224,8 +224,8 @@ const searchData = [
   },
   {
     type: "Location",
-    label: "Clare, South Australia",
-    description: "Serving Clare and surrounding areas with authentic pizza",
+    label: "Adelaide, South Australia",
+    description: "Serving Adelaide and surrounding areas with authentic pizza",
     link: "/#contact",
   },
 

@@ -73,7 +73,7 @@ export const bookPizzaCatering = () => {
     email: '',
     customAnswers: {
       a1: 'Pizza Master & The Slice - Mobile Catering Inquiry',
-      a2: 'Clare, South Australia'
+      a2: 'Adelaide, South Australia'
     }
   };
 
