@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ChatWidget from '../components/ChatWidget';
-import { useScrollAnimation, useStaggerAnimation } from '../hooks/useScrollAnimation';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import ourEventsData from '../data/ourEvents.json';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -150,8 +151,11 @@ const Gallery = () => {
     }
   ];
 
+  // Our Events (from JSON)
+  const ourEvents = ourEventsData;
+
   // Combine all images and videos for carousel
-  const allGalleryItems = [...ourPizzas, ...ourWork, ...ourVideos];
+  const allGalleryItems = [...ourPizzas, ...ourWork, ...ourEvents, ...ourVideos];
 
   // Navigation functions for carousel
   const goToPrevious = () => {
@@ -290,6 +294,37 @@ const Gallery = () => {
                 </div>
               </div>
             ))}
+
+            {/* Our Events - one card beside Catering Setup */}
+            <div 
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
+              onClick={() => handleImageClick(ourEvents[0], ourPizzas.length + ourWork.length)}
+            >
+              <div className="relative h-80 md:h-96">
+                <img
+                  src={ourEvents[0].src}
+                  alt="Our Events"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="bg-woodbrown-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                      Events
+                    </span>
+                    <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">Our Events</h3>
+                  <p className="text-beigelight-200 text-sm leading-relaxed">
+                    Pizza Master & The Slice at your event.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -311,7 +346,7 @@ const Gallery = () => {
               <div 
                 key={video.id}
                 className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
-                onClick={() => handleImageClick(video, ourPizzas.length + ourWork.length + index)}
+                onClick={() => handleImageClick(video, ourPizzas.length + ourWork.length + ourEvents.length + index)}
               >
                 <div className="relative h-80 md:h-96">
                   <video
