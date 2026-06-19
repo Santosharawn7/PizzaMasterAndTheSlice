@@ -102,7 +102,7 @@ const AppointmentFooter = () => {
               Visit Us
             </h3>
             <span className="text-beigelight-200">
-              Duffield Avenue Munnopara, Adelaide SA 5115, Australia
+              Adelaide, Australia
             </span>
           </div>
         </div>

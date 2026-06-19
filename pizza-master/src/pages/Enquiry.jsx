@@ -164,7 +164,7 @@ const Enquiry = () => {
                   <div className="flex items-center justify-center mb-2">
                     <span className="text-2xl mr-3">📍</span>
                     <span className="text-lg text-woodbrown-700">
-                      Duffield Avenue Munnopara, Adelaide SA 5115, Australia
+                      Adelaide, Australia
                     </span>
                   </div>
                   <div className="flex items-center justify-center">
