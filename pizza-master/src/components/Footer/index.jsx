@@ -85,7 +85,7 @@ const Footer = ({ pageType = "full", scrollToSection }) => {
               <div className="flex items-center">
                 <MapPin className="w-5 h-5 mr-3 text-beigelight-300" />
                 <span className="text-beigelight-200">
-                  Duffield Avenue Munnopara, Adelaide SA 5115, Australia
+                  Adelaide, Australia
                 </span>
               </div>
             </div>

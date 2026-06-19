@@ -24,7 +24,7 @@ const faqData = [
   {
     id: 3,
     question: "Where are you located?",
-    answer: "We are based in Adelaide, South Australia (Duffield Avenue Munnopara, Adelaide SA 5115), and serve the entire Adelaide and surrounding areas with our mobile pizza services.",
+    answer: "We are based in Adelaide, South Australia, and serve the entire Adelaide and surrounding areas with our mobile pizza services.",
     keywords: ["location", "adelaide", "south australia", "adelaide", "australia", "serve", "community", "temple rd"],
     type: "location"
   },
